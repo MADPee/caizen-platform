@@ -12,6 +12,7 @@ _GitHub: https://github.com/MADPee/caizen-platform_
 - [ ] API.md dokumentation
 - [ ] Deploy till Vercel/Staging
 - [ ] Database migrations (Supabase)
+- [ ] NHOST Migration Plan och Branch-strategi fastställs
 
 ### 2. ⚡ **MEDEL PRIORITERAT** (Kommande sprintar)
 
@@ -19,6 +20,7 @@ _GitHub: https://github.com/MADPee/caizen-platform_
 - [ ] Custom hooks implementation
 - [ ] E2E testing med Playwright
 - [ ] Monitoring setup
+- [ ] Nhost adapter (skelett) i separat branch
 
 ### 3. 🔮 **LÅG PRIORITERAT** (Framtida features)
 
