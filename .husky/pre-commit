@@ -1,0 +1,29 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "🔍 Säkerhetskontroll..."
+
+# Kontrollera efter registreringsnummer
+if git diff --cached --name-only | xargs grep -l "\b[A-Z]{3}[0-9]{3}\b" 2>/dev/null; then
+  echo "❌ VARNING: Registreringsnummer upptäckt i commit!"
+  echo "   Använd testdata eller maskerade värden istället."
+  exit 1
+fi
+
+# Kontrollera efter VIN
+if git diff --cached --name-only | xargs grep -l "\b[A-HJ-NPR-Z0-9]{17}\b" 2>/dev/null; then
+  echo "❌ VARNING: VIN-nummer upptäckt i commit!"
+  echo "   Använd testdata eller maskerade värden istället."
+  exit 1
+fi
+
+# Kontrollera efter personnummer
+if git diff --cached --name-only | xargs grep -l "\b[0-9]{6}-[0-9]{4}\b" 2>/dev/null; then
+  echo "❌ VARNING: Personnummer upptäckt i commit!"
+  exit 1
+fi
+
+# Kör linting
+npm run lint-staged
+
+echo "✅ Säkerhetskontroll godkänd"
