@@ -77,7 +77,27 @@ _GitHub: https://github.com/MADPee/caizen-platform_
 - [x] Säkerhetsutils och datamaskering
 - [x] TypeScript type definitions
 
-### Saknade Components
+### Saknade Components (Installation Guide Prioritet)
+
+**⚡ HÖGT PRIORITERAT (Från Installation Guide):**
+
+- [ ] **FuelEntry.tsx**
+  - [ ] Komponent för tankningsregistrering
+  - [ ] Baserad på VehicleRegistration.tsx mönster
+  - [ ] Samma säkerhetsnivå som fordonsregistrering
+  - [ ] Automatisk kostnadskalkyl och validering
+
+- [ ] **MarketplaceCard.tsx**
+  - [ ] Följer samma mönster som VehicleRegistration.tsx
+  - [ ] Säker fordonsvisning för marknadsplats
+  - [ ] Privacy-safe kontaktinformation
+
+- [ ] **ServiceHistory.tsx**
+  - [ ] Servicehistorik komponent
+  - [ ] Använder samma datamaskering som dataMasking.ts
+  - [ ] Säker hantering av servicedata
+
+**🔧 MEDEL PRIORITERAT:**
 
 - [ ] **TripAnalysisDashboard.tsx**
   - [ ] Reseanalys med kartor
@@ -131,13 +151,21 @@ _GitHub: https://github.com/MADPee/caizen-platform_
   - [ ] Processing status
   - [ ] Result retrieval
 
-### Custom Hooks
+### Custom Hooks (Installation Guide Prioritet)
+
+**⚡ HÖGT PRIORITERAT:**
 
 - [ ] **useVehicles.ts** - Fordonshantering
+  - [ ] CRUD operations för fordon
+  - [ ] Integration med VehicleRegistration
+  - [ ] Säker state management
+
+**🔧 MEDEL PRIORITERAT:**
+
+- [ ] **useAuth.ts** - Authentication state
 - [ ] **usePrivacy.ts** - Privacy settings
 - [ ] **useOCR.ts** - Dokumentprocessing
 - [ ] **useGeolocation.ts** - Säker location handling
-- [ ] **useAuth.ts** - Authentication state
 
 ---
 
@@ -215,6 +243,46 @@ _GitHub: https://github.com/MADPee/caizen-platform_
 - [ ] **Security audit**
 - [ ] **GDPR compliance review**
 - [ ] **Privacy impact assessment**
+
+## 🔍 Installation Guide Specific TODOs
+
+### Säkerhetstestning (Från Installation Guide)
+
+- [ ] **Manual Security Verification**
+  - [ ] Registrera testfordon med reg.nr "ABC123"
+  - [ ] Verifiera att det visas som "ABC\*\*\*" i UI
+  - [ ] Kontrollera konsolen - inget klartext reg.nr ska synas
+  - [ ] Försök committa kod med riktigt reg.nr - Git hook ska stoppa
+
+### Cursor Composer Prompts (Redo att använda)
+
+- [ ] **FuelEntry Component Prompt:**
+  ```
+  "Skapa en FuelEntry-komponent baserat på mönstret från VehicleRegistration.
+  Den ska hantera tankningar med samma säkerhetsnivå."
+  ```
+- [ ] **React Router Prompt:**
+  ```
+  "Setup React Router med dessa routes:
+  - / (Dashboard)
+  - /vehicles (Fordonsöversikt)
+  - /marketplace (Marknadsplats)
+  Använd samma designsystem som VehicleRegistration."
+  ```
+- [ ] **Supabase Integration Prompt:**
+  ```
+  "Skapa en Supabase client i src/lib/api/supabase.ts
+  Använd environment variables från .env.example"
+  ```
+
+### Troubleshooting Checklista (Installation Guide)
+
+- [ ] **Verifieringschecklista implementerad**
+  - [ ] Filstruktur kontroll
+  - [ ] Funktionalitet test
+  - [ ] Development tools test
+  - [ ] npm run commands fungerar
+  - [ ] Hot reload fungerar
 
 ---
 
@@ -297,28 +365,55 @@ _GitHub: https://github.com/MADPee/caizen-platform_
 
 ---
 
-## 🎯 Immediate Next Steps (Nästa 2 veckor)
+## 🎯 Immediate Next Steps (Installation Guide Approach)
 
-### Sprint 1: DevOps Foundation
+### 🚀 Phase 1: Router & Navigation (Vecka 40)
 
-1. [ ] GitHub Actions CI/CD pipeline
-2. [ ] Vercel deployment setup
-3. [ ] Supabase database schema
-4. [ ] Basic monitoring (Sentry)
+**Installation Guide Priority #1**
 
-### Sprint 2: Core Components
+- [ ] **React Router Setup**
+  - [ ] Routes: / (Dashboard), /vehicles, /marketplace
+  - [ ] Navigation komponent med Header/Footer
+  - [ ] Använd samma designsystem som VehicleRegistration
+  - [ ] Breadcrumb navigation
 
-1. [ ] API.md dokumentation
-2. [ ] TripAnalysisDashboard component
-3. [ ] FuelManagement component
-4. [ ] Custom hooks implementation
+### ⚡ Phase 2: Core Components Sprint (Vecka 41)
 
-### Sprint 3: Testing & Quality
+**Installation Guide Priority #2**
 
-1. [ ] Unit tests för core funktioner
-2. [ ] E2E tests för kritiska flöden
-3. [ ] Security audit
-4. [ ] Performance optimization
+- [ ] **FuelEntry.tsx** (HÖGT PRIORITERAT)
+  - [ ] Baserat på VehicleRegistration.tsx mönster
+  - [ ] Samma säkerhetsnivå som fordonsregistrering
+- [ ] **MarketplaceCard.tsx**
+  - [ ] Följer VehicleRegistration mönster
+- [ ] **ServiceHistory.tsx**
+  - [ ] Använder dataMasking.ts
+
+### 🔧 Phase 3: Backend Integration (Vecka 42)
+
+**Installation Guide Priority #3**
+
+- [ ] **Supabase Client**
+  - [ ] Skapa src/lib/api/supabase.ts
+  - [ ] Environment variables från .env.example
+  - [ ] Authentication setup
+- [ ] **Database Schema Implementation**
+  - [ ] Vehicles table med säkerhet
+  - [ ] Row Level Security policies
+
+### 📊 Phase 4: DevOps Foundation (Vecka 43)
+
+- [ ] GitHub Actions CI/CD pipeline
+- [ ] Vercel deployment setup
+- [ ] Basic monitoring (Sentry)
+- [ ] API.md dokumentation
+
+### 🧪 Phase 5: Testing & Quality (Vecka 44)
+
+- [ ] Unit tests för security functions
+- [ ] E2E tests för vehicle registration flow
+- [ ] Security audit med installation guide checklista
+- [ ] Performance optimization
 
 ---
 
