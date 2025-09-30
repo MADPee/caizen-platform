@@ -1,14 +1,5 @@
-# CaiZen Platform - Dokumentation
+# CaiZen Documentation
 
-## Översikt
-
-CaiZen är en säker fordonshanteringsplattform med privacy-first design.
-
-## Dokumentationsstruktur
-
-- `/specifications` - Produktspecifikationer och arkitektur
-- `/design` - Designsystem och UI/UX-dokumentation
-
-## Snabbstart
-
-Se projektets root README.md för installationsinstruktioner.
+- current/: aktiv dokumentation v2.0
+- legacy/: historik (arkiverat, påverkar ej build)
+- sessions/: utvecklingssessioner

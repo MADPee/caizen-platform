@@ -1,0 +1,9 @@
+docs/legacy/**
+dist/
+build/
+.next/
+out/
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

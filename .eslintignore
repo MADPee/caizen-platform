@@ -1,0 +1,10 @@
+docs/**
+*.md
+src/components/legacy/**
+dist/
+build/
+.next/
+out/
+node_modules/
+.eslintcache
+.cache/
