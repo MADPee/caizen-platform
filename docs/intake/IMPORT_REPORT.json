@@ -1,0 +1,149 @@
+{
+  "imported": [
+    {
+      "name": "caizen_backend_interface.ts",
+      "size": 8236
+    },
+    {
+      "name": "caizen_nhost_setup.md",
+      "size": 17193
+    },
+    {
+      "name": "org.caizen_caizen-v2-handover-doc.txt",
+      "size": 19486
+    },
+    {
+      "name": "org.caizen_caizen_session_summary_v2.md",
+      "size": 23162
+    },
+    {
+      "name": "org.caizen_api-recommendations.md",
+      "size": 4701
+    },
+    {
+      "name": "org.caizen_project-instructions-v3_created_2025-09-29.md",
+      "size": 17023
+    },
+    {
+      "name": "test_caizen_autosamling.md",
+      "size": 0
+    },
+    {
+      "name": "org.caizen_bmw-e91-for-sale_example.html",
+      "size": 17221
+    },
+    {
+      "name": "caizen_setup_script.sh",
+      "size": 11467
+    },
+    {
+      "name": "org.caizen_mycarsjournal-spec-v3.md",
+      "size": 7178
+    },
+    {
+      "name": "caizen-build-safety-configs-2.txt",
+      "size": 11405
+    },
+    {
+      "name": "org.caizen_mitt-garage.tsx",
+      "size": 15349
+    },
+    {
+      "name": "caizen-build-safety-configs.txt",
+      "size": 11121
+    },
+    {
+      "name": "org.caizen_first iteration_caizen-dashboard.html",
+      "size": 28377
+    },
+    {
+      "name": "caizen_vehicle_registration.ts",
+      "size": 20191
+    },
+    {
+      "name": "caizen_github_structure.md",
+      "size": 10156
+    },
+    {
+      "name": "org.caizen_bmw-m3-fuel-analysis_example.md",
+      "size": 10225
+    },
+    {
+      "name": "caizen_complete_package_json.json",
+      "size": 2231
+    },
+    {
+      "name": "org.caizen_caizen-dev-status-sept-2025.md",
+      "size": 14383
+    },
+    {
+      "name": "caizen_type_definitions.ts",
+      "size": 15399
+    },
+    {
+      "name": "caizen_nhost_package_json.json",
+      "size": 2779
+    },
+    {
+      "name": "org.caizen_bmw-m3-service-log_example.md",
+      "size": 1548
+    },
+    {
+      "name": "caizen_export_guide.md",
+      "size": 12785
+    },
+    {
+      "name": "caizen_backend_strategy.md",
+      "size": 13201
+    },
+    {
+      "name": "caizen_supabase_adapter.ts",
+      "size": 18450
+    },
+    {
+      "name": "org.caizen_caizen-v2-unified-dashboard.tsx",
+      "size": 20337
+    },
+    {
+      "name": "org.caizen-mobile-dashboard_example.tsx",
+      "size": 18367
+    },
+    {
+      "name": "test_CaiZen_script.sh",
+      "size": 20
+    },
+    {
+      "name": "caizen_security_utils.ts",
+      "size": 7434
+    },
+    {
+      "name": "caizen_type_definitions-2.ts",
+      "size": 15643
+    },
+    {
+      "name": "test_CaiZen_doc.md",
+      "size": 13
+    },
+    {
+      "name": "org.caizen_bmw-m3-detailed-report_example.md",
+      "size": 9905
+    },
+    {
+      "name": "org.caizen_updated-product-spec.md",
+      "size": 20077
+    },
+    {
+      "name": "org.caizen_funktionsförklaring-explanation.html",
+      "size": 12147
+    },
+    {
+      "name": "caizen_installation_guide.md",
+      "size": 12243
+    },
+    {
+      "name": "org.caizen_tech-arch-v3.md",
+      "size": 5283
+    }
+  ],
+  "skipped": []
+}

@@ -1,0 +1,148 @@
+{
+  "moved": [
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_backend_interface.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_backend_interface.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_nhost_setup.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/backend/caizen_nhost_setup.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_caizen-v2-handover-doc.txt",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/org.caizen_caizen-v2-handover-doc.txt"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_caizen_session_summary_v2.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_caizen_session_summary_v2.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_api-recommendations.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_api-recommendations.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_project-instructions-v3_created_2025-09-29.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_project-instructions-v3_created_2025-09-29.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/test_caizen_autosamling.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/test_caizen_autosamling.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_bmw-e91-for-sale_example.html",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_bmw-e91-for-sale_example.html"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_setup_script.sh",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_setup_script.sh"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_mycarsjournal-spec-v3.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_mycarsjournal-spec-v3.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen-build-safety-configs-2.txt",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen-build-safety-configs-2.txt"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_mitt-garage.tsx",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_mitt-garage.tsx"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen-build-safety-configs.txt",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen-build-safety-configs.txt"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_first iteration_caizen-dashboard.html",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_first iteration_caizen-dashboard.html"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_vehicle_registration.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_vehicle_registration.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_github_structure.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_github_structure.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_bmw-m3-fuel-analysis_example.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_bmw-m3-fuel-analysis_example.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_complete_package_json.json",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_complete_package_json.json"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_caizen-dev-status-sept-2025.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_caizen-dev-status-sept-2025.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_type_definitions.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_type_definitions.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_nhost_package_json.json",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/backend/caizen_nhost_package_json.json"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_bmw-m3-service-log_example.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_bmw-m3-service-log_example.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_export_guide.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_export_guide.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_backend_strategy.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/backend/caizen_backend_strategy.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_supabase_adapter.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/backend/caizen_supabase_adapter.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_caizen-v2-unified-dashboard.tsx",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/org.caizen_caizen-v2-unified-dashboard.tsx"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen-mobile-dashboard_example.tsx",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen-mobile-dashboard_example.tsx"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/test_CaiZen_script.sh",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/test_CaiZen_script.sh"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_security_utils.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_security_utils.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_type_definitions-2.ts",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_type_definitions-2.ts"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/test_CaiZen_doc.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/test_CaiZen_doc.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_bmw-m3-detailed-report_example.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_bmw-m3-detailed-report_example.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_updated-product-spec.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_updated-product-spec.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_funktionsförklaring-explanation.html",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_funktionsförklaring-explanation.html"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/caizen_installation_guide.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/current/caizen_installation_guide.md"
+    },
+    {
+      "from": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/intake/org.caizen_tech-arch-v3.md",
+      "to": "/Users/marcusanderssondipace/caizen-platform/caizen-platform/docs/legacy/UNSORTED/org.caizen_tech-arch-v3.md"
+    }
+  ]
+}

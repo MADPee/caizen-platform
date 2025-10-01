@@ -1,0 +1,430 @@
+# ============================================
+# CaiZen Build Safety Configuration
+# Version: 2.0
+# Datum: 2025-05-30
+# ============================================
+
+# -----------------------------------------
+# .eslintignore
+# -----------------------------------------
+# ESLint ska INTE köras på dessa filer/mappar
+
+# Documentation (aldrig linta markdown/HTML)
+docs/**
+*.md
+
+# Legacy kod (ska inte påverka linting)
+src/components/legacy/**
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Cache
+.eslintcache
+.cache/
+
+# -----------------------------------------
+# .prettierignore
+# -----------------------------------------
+# Prettier ska INTE formatera dessa filer
+
+# Legacy dokumentation
+docs/legacy/**
+
+# Build outputs
+dist/
+build/
+.next/
+out/
+
+# Dependencies
+node_modules/
+
+# Lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# -----------------------------------------
+# package.json scripts (uppdaterade)
+# -----------------------------------------
+{
+  "scripts": {
+    "lint": "eslint 'src/**/*.{js,ts,jsx,tsx}' --max-warnings=0",
+    "lint:fix": "eslint 'src/**/*.{js,ts,jsx,tsx}' --fix",
+    "type-check": "tsc --noEmit --project tsconfig.json",
+    "format": "prettier --write 'src/**/*.{js,ts,jsx,tsx}' 'docs/current/**/*.md'",
+    "format:check": "prettier --check 'src/**/*.{js,ts,jsx,tsx}'",
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts",
+    "test:coverage": "vitest run --coverage"
+  }
+}
+
+# -----------------------------------------
+# tsconfig.json (för er stack med tsconfig.app.json)
+# -----------------------------------------
+# OBS: Ni har redan tsconfig.app.json som hanterar "include": ["src"]
+# Denna config behöver därför INTE excludes för legacy
+# Behåll er befintliga tsconfig.json/tsconfig.app.json struktur
+
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true
+  },
+  "include": [
+    "src/**/*"
+  ]
+  // Excludes inte nödvändiga eftersom tsconfig.app.json redan scope:ar till src/
+}
+
+# -----------------------------------------
+# vitest.config.ts (lägg in när ni börjar skriva tester)
+# -----------------------------------------
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './src/test/setup.ts',
+    include: [
+      'src/**/__tests__/**/*.{test,spec}.{js,ts,jsx,tsx}',
+      'tests/**/*.{test,spec}.{js,ts,jsx,tsx}'
+    ],
+    exclude: [
+      'node_modules',
+      'dist',
+      'build',
+      'docs',
+      'src/components/legacy/**'
+    ],
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: [
+        'node_modules/',
+        'src/test/',
+        'src/components/legacy/',
+        '**/*.d.ts',
+        '**/*.config.*',
+        '**/mockData/*',
+        'tests/fixtures/'
+      ]
+    }
+  }
+});
+
+# -----------------------------------------
+# tailwind.config.js (Tailwind v4-kompatibel)
+# -----------------------------------------
+# OBS: Ni kör Tailwind v4 där content-globs fungerar annorlunda
+# Denna config är för referens - justera enligt er v4-setup
+
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}"
+    // I v4 ignoreras docs/ och legacy/ automatiskt om de inte matchar glob
+  ],
+  theme: {
+    extend: {
+      colors: {
+        'caizen-blue': '#0066B1',
+        'caizen-orange': '#FF7700',
+        'caizen-purple': '#6F2B90',
+        'caizen-red': '#FF0000',
+        'caizen-dark': '#222222',
+        'privacy-personal': '#ef4444',
+        'privacy-vehicle': '#22c55e',
+        'privacy-mixed': '#eab308',
+      }
+    }
+  },
+  plugins: []
+};
+
+# -----------------------------------------
+# .husky/pre-commit (uppdaterad för er stack)
+# -----------------------------------------
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+echo "Running pre-commit checks..."
+
+# 1. Lint staged files med lint-staged
+echo "Linting staged files..."
+npx lint-staged
+
+# 2. Type check
+echo "Type checking..."
+npm run type-check
+
+# 3. Scan för känslig data (exkludera legacy docs)
+echo "Scanning for sensitive data..."
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM)
+
+# Exkludera docs/legacy/** från sensitive data scan
+FILTERED_FILES=$(echo "$STAGED_FILES" | grep -v "^docs/legacy/" | grep -v "^node_modules/")
+
+if [ -n "$FILTERED_FILES" ]; then
+  # Scan för VIN-nummer (ej maskerade)
+  if echo "$FILTERED_FILES" | xargs grep -l "WBA[0-9A-Z]\{14\}" 2>/dev/null; then
+    echo "Warning: Unmaskerat VIN-nummer hittades!"
+    echo "Granska filen och maskera om nödvändigt."
+    exit 1
+  fi
+  
+  # Scan för personnummer
+  if echo "$FILTERED_FILES" | xargs grep -l "[0-9]\{6\}-[0-9]\{4\}" 2>/dev/null; then
+    echo "Warning: Möjligt personnummer hittades!"
+    echo "Granska filen innan commit."
+    exit 1
+  fi
+  
+  # Scan för API-nycklar (enkel pattern)
+  if echo "$FILTERED_FILES" | xargs grep -l "api[_-]key.*=.*['\"][a-zA-Z0-9]\{20,\}" 2>/dev/null; then
+    echo "Warning: Möjlig API-nyckel hittades!"
+    echo "Använd environment variables istället."
+    exit 1
+  fi
+fi
+
+echo "Pre-commit checks passed!"
+
+# -----------------------------------------
+# lint-staged.config.js (PROJEKTROT)
+# -----------------------------------------
+module.exports = {
+  // Endast linta TypeScript/JavaScript från src/
+  'src/**/*.{js,ts,jsx,tsx}': [
+    'eslint --fix --max-warnings=0',
+    'prettier --write'
+  ],
+  
+  // Formatera markdown (men inte i legacy/)
+  'docs/current/**/*.md': [
+    'prettier --write'
+  ],
+  
+  // Formatera JSON/YAML
+  '*.{json,yml,yaml}': [
+    'prettier --write'
+  ]
+};
+
+# -----------------------------------------
+# .github/workflows/ci.yml (CI pipeline)
+# -----------------------------------------
+name: CI Pipeline
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'tsconfig.json'
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'package.json'
+      - 'tsconfig.json'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Run ESLint
+        run: npm run lint
+      - name: Check formatting
+        run: npm run format:check
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: TypeScript check
+        run: npm run type-check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - run: npm ci
+      - name: Run tests
+        run: npm run test:coverage
+      - name: Upload coverage
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./coverage/coverage-final.json
+
+# -----------------------------------------
+# src/components/index.ts (SAFE exports)
+# -----------------------------------------
+// ⚠️ VIKTIGT: Importera ENDAST från v2.0/
+// Legacy-komponenter ska ALDRIG exporteras här
+
+// v2.0 Privacy-First Components
+export { default as CaizenV2Dashboard } from './v2.0/CaizenV2Dashboard';
+export { default as PrivacyBadge } from './v2.0/PrivacyComponents/PrivacyBadge';
+export { default as VehicleIdentityCard } from './v2.0/VehicleIdentityCard';
+export { default as FuelHistoryTable } from './v2.0/FuelHistoryTable';
+
+// Utils
+export * from './v2.0/utils/privacyMasking';
+export * from './v2.0/utils/dataValidation';
+
+// Types
+export type { VehicleData, PersonalData, PrivacyMode } from './v2.0/types';
+
+// ❌ ALDRIG importera från legacy:
+// export * from './legacy/...';  // FÖRBJUDET!
+
+# -----------------------------------------
+# docs/README.md
+# -----------------------------------------
+# CaiZen Documentation Structure
+
+## 📂 Mappöversikt
+
+### `/current/` - Aktuell Dokumentation
+Innehåller all giltig, uppdaterad dokumentation för v2.0:
+- PRD (Product Requirements Document)
+- Projektinstruktioner
+- Komponentdokumentation
+- Developer Handover
+
+**Regel:** Endast v2.0-dokument ska finnas här.
+
+### `/legacy/` - Historisk Dokumentation
+Arkiverade dokument från tidigare versioner:
+- `/v0.1.0/` - Initial prototyper (2025-04-17)
+- `/v1.0/` - Pre-privacy-first arkitektur
+
+**Regel:** Dessa dokument är för historiskt sammanhang. 
+**VARNING:** Legacy-kod får ALDRIG importeras i build.
+
+### `/sessions/` - Utvecklingssessioner
+Sammanfattningar från utvecklingsmöten och chattsessioner:
+- Dagliga utvecklingsloggar
+- Beslutsdokumentation
+- Tekniska diskussioner
+
+**Regel:** Kronologisk ordning, en fil per session.
+
+## 🔒 Säkerhet
+
+Legacy-dokumentation kan innehålla omaskerad data från tidiga prototyper.
+**Dessa filer:**
+- Laddas INTE av build-verktyg
+- Lintas INTE av ESLint
+- Testas INTE av Vitest
+- Inkluderas INTE i TypeScript compilation
+
+Se `.eslintignore`, `tsconfig.json` och `vitest.config.ts` för konfiguration.
+
+## 🏷️ Versionshantering
+
+Dokumentnamn ska följa konventionen:
+- `[DOKUMENT-NAMN]-v[VERSION].md` - Aktuella dokument
+- `[ARKIV-v1.0] [DOKUMENT-NAMN].md` - Arkiverade dokument
+
+Exempel:
+- ✅ `PRD-v2.0.md`
+- ✅ `[ARKIV-v0.1.0] Komponentdokumentation.md`
+- ❌ `Uppdaterad-Dokumentation.md` (vag namngivning)
+
+## 📝 Underhåll
+
+Vid nya versioner:
+1. Flytta gamla dokument till `/legacy/v[X.Y.Z]/`
+2. Uppdatera denna README
+3. Tagga i Git: `git tag docs-v2.0`
+
+---
+*Senast uppdaterad: 2025-05-30*
+
+# -----------------------------------------
+# CHECKLISTA: Implementation
+# -----------------------------------------
+
+✅ Skapa `.eslintignore`
+✅ Skapa `.prettierignore`
+✅ Uppdatera `package.json` scripts
+✅ Verifiera `tsconfig.json` excludes
+✅ Skapa/uppdatera `vitest.config.ts`
+✅ Uppdatera `tailwind.config.js`
+✅ Uppdatera `.husky/pre-commit`
+✅ Skapa `lint-staged.config.js`
+✅ Skapa `.github/workflows/ci.yml`
+✅ Säkra `src/components/index.ts`
+✅ Skapa `docs/README.md`
+
+# -----------------------------------------
+# VERIFIERING
+# -----------------------------------------
+
+# Testa att legacy INTE lintas:
+npm run lint  # Ska INTE ge fel från legacy/
+
+# Testa att TypeScript INTE kompilerar legacy:
+npm run type-check  # Ska INTE kolla legacy/
+
+# Testa att tests INTE kör på legacy:
+npm test  # Ska INTE köra tests i legacy/
+
+# Testa pre-commit hook:
+git add .
+git commit -m "test"  # Ska genomföra alla checks
+
+# Verifiera att Tailwind INTE processar legacy:
+npm run build  # Ska INTE inkludera CSS från legacy/
+
+# -----------------------------------------
+# FRAMTIDA SKYDD
+# -----------------------------------------
+
+# Om ni lägger till nya tools (Biome, Oxc, etc):
+# - Lägg till motsvarande ignore-filer
+# - Uppdatera CI pipeline
+# - Dokumentera i denna fil
