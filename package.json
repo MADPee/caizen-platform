@@ -21,7 +21,9 @@
     "setup": "chmod +x scripts/setup.sh && ./scripts/setup.sh",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "docs:index": "node scripts/update-docs-index.mjs"
+    "docs:index": "node scripts/update-docs-index.mjs",
+    "docs:intake": "node scripts/intake-import-classify.mjs",
+    "docs:intake:apply": "node scripts/intake-import-classify.mjs --apply"
   },
   "dependencies": {
     "react": "^19.1.1",
