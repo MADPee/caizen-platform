@@ -1,0 +1,31 @@
+name: Docs Index Nightly PR
+
+on:
+  schedule:
+    - cron: "0 2 * * *" # varje natt 02:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - name: Rebuild docs index
+        run: npm run docs:index
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "docs(index): nightly refresh"
+          title: "docs(index): nightly refresh"
+          body: "Automatiskt genererad uppdatering av docs/INDEX.md"
+          branch: ci/docs-index-nightly
+          base: main
+          add-paths: |
+            docs/INDEX.md
