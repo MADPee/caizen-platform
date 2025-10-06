@@ -22,7 +22,8 @@ const legacyUnsortedDir = path.join(docsDir, 'legacy', 'UNSORTED');
 
 const orgPattern = /^(org[\._-]?caizen|caizen[\._-]?org)/i;
 const legacyKeywords = [/\bv0(\.[0-9]+)*\b/i, /\bv1(\.[0-9]+)*\b/i, /prototype/i, /draft/i];
-const currentKeywords = [/\bv2(\.[0-9]+)*\b/i, /guide/i, /installation/i, /architecture/i, /security/i, /strategy/i, /nhost/i, /supabase/i];
+// Klassificera v3-dokument som current (utöver v2 och andra nyckelord)
+const currentKeywords = [/\bv3(\.[0-9]+)*\b/i, /\bv2(\.[0-9]+)*\b/i, /guide/i, /installation/i, /architecture/i, /security/i, /strategy/i, /nhost/i, /supabase/i];
 
 async function ensureDirs() {
   for (const d of [intakeDir, backendDir, currentDir, legacyUnsortedDir]) {
