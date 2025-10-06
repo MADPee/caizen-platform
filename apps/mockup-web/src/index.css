@@ -1,0 +1,81 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 2% 13.3%; /* #222222 */
+    --foreground: 0 0% 78%; /* #C5C5C5 */
+
+    --card: 216 2% 11.8%; /* #1E1E1E */
+    --card-foreground: 0 0% 78%;
+
+    --popover: 216 2% 11.8%;
+    --popover-foreground: 0 0% 78%;
+
+    --primary: 206 100% 35.1%; /* #0066B1 */
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 216 2% 11.8%;
+    --secondary-foreground: 0 0% 78%;
+
+    --muted: 216 2% 11.8%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 21 100% 50%; /* #FF7700 */
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 216 2% 15.7%;
+    --input: 216 2% 15.7%;
+    --ring: 206 100% 35.1%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 216 2% 11.8%;
+    --sidebar-foreground: 0 0% 78%;
+    --sidebar-primary: 206 100% 35.1%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 216 2% 15.7%;
+    --sidebar-accent-foreground: 0 0% 78%;
+    --sidebar-border: 216 2% 15.7%;
+    --sidebar-ring: 206 100% 35.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    background: linear-gradient(180deg, #222222 0%, #1E1E1E 100%);
+    min-height: 100vh;
+  }
+
+  /* Security indicator styles */
+  .security-indicator {
+    @apply relative overflow-hidden;
+  }
+
+  .security-indicator::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-0.5 bg-racing-stripe;
+    animation: data-flow 3s ease-in-out infinite;
+  }
+
+  /* Dashboard gauge styles */
+  .gauge-border {
+    background: conic-gradient(from 180deg, #0066B1, #6F2B90, #FF0000, #FF7700, #0066B1);
+    padding: 2px;
+    border-radius: 50%;
+  }
+
+  .gauge-inner {
+    @apply bg-automotive-darker rounded-full w-full h-full;
+  }
+}

@@ -1,0 +1,22 @@
+# Roadmap: Go-live December
+
+- UI polish + SEO baseline
+  - Finalize UI/UX on pages
+  - Basic SEO (noindex until go-live)
+- Supabase (EU) + Auth + RLS
+  - Create project EU region, configure Auth
+  - Base RLS policies, env vars
+- API/data layer (TanStack Query)
+  - Define types, queries, mutations
+  - Wire marketplace/vehicles flows
+- Security hardening
+  - Vercel headers/CSP verified
+  - Dependabot + secret scanning + Sentry
+- Testing & performance
+  - E2E smoke + security checks
+  - Perf pass, fix regressions
+- Staging deploy + UAT
+  - Staging without DNS, UAT and fixes
+- Go-live (DNS to Vercel)
+  - Point caizen.se via Loopia
+  - Enable indexing, announce
