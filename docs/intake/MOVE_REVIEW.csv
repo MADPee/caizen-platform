@@ -1,0 +1,16 @@
+file,from,to,confidence,reason
+"org.caizen-mobile-dashboard_example.tsx","docs/legacy/UNSORTED/org.caizen-mobile-dashboard_example.tsx","docs/legacy/examples/org.caizen-mobile-dashboard_example.tsx",medium,example
+"org.caizen_api-recommendations.md","docs/legacy/UNSORTED/org.caizen_api-recommendations.md","docs/legacy/notes/org.caizen_api-recommendations.md",medium,note
+"org.caizen_bmw-e91-for-sale_example.html","docs/legacy/UNSORTED/org.caizen_bmw-e91-for-sale_example.html","docs/legacy/examples/org.caizen_bmw-e91-for-sale_example.html",medium,example
+"org.caizen_bmw-m3-detailed-report_example.md","docs/legacy/UNSORTED/org.caizen_bmw-m3-detailed-report_example.md","docs/legacy/examples/org.caizen_bmw-m3-detailed-report_example.md",medium,example
+"org.caizen_bmw-m3-fuel-analysis_example.md","docs/legacy/UNSORTED/org.caizen_bmw-m3-fuel-analysis_example.md","docs/legacy/examples/org.caizen_bmw-m3-fuel-analysis_example.md",medium,example
+"org.caizen_bmw-m3-service-log_example.md","docs/legacy/UNSORTED/org.caizen_bmw-m3-service-log_example.md","docs/legacy/examples/org.caizen_bmw-m3-service-log_example.md",medium,example
+"org.caizen_caizen-dev-status-sept-2025.md","docs/legacy/UNSORTED/org.caizen_caizen-dev-status-sept-2025.md","docs/legacy/notes/org.caizen_caizen-dev-status-sept-2025.md",medium,note
+"org.caizen_caizen_session_summary_v2.md","docs/legacy/UNSORTED/org.caizen_caizen_session_summary_v2.md","docs/legacy/notes/org.caizen_caizen_session_summary_v2.md",medium,note
+"org.caizen_first iteration_caizen-dashboard.html","docs/legacy/UNSORTED/org.caizen_first iteration_caizen-dashboard.html","docs/legacy/prototypes/org.caizen_first iteration_caizen-dashboard.html",medium,prototype
+"org.caizen_funktionsförklaring-explanation.html","docs/legacy/UNSORTED/org.caizen_funktionsförklaring-explanation.html","docs/legacy/prototypes/org.caizen_funktionsförklaring-explanation.html",medium,prototype
+"org.caizen_mitt-garage.tsx","docs/legacy/UNSORTED/org.caizen_mitt-garage.tsx","docs/legacy/prototypes/org.caizen_mitt-garage.tsx",medium,prototype
+"org.caizen_mycarsjournal-spec-v3.md","docs/legacy/UNSORTED/org.caizen_mycarsjournal-spec-v3.md","docs/current/org.caizen_mycarsjournal-spec-v3.md",high,version>=3
+"org.caizen_project-instructions-v3_created_2025-09-29.md","docs/legacy/UNSORTED/org.caizen_project-instructions-v3_created_2025-09-29.md","docs/legacy/UNSORTED/org.caizen_project-instructions-v3_created_2025-09-29.md",low,spec-unknown-version
+"org.caizen_tech-arch-v3.md","docs/legacy/UNSORTED/org.caizen_tech-arch-v3.md","docs/current/org.caizen_tech-arch-v3.md",high,version>=3
+"org.caizen_updated-product-spec.md","docs/legacy/UNSORTED/org.caizen_updated-product-spec.md","docs/legacy/UNSORTED/org.caizen_updated-product-spec.md",low,spec-unknown-version

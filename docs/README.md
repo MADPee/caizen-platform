@@ -20,3 +20,11 @@ Regler (AI & människor ska följa):
 - `docs/backend/`: strategier, migrations, adapters
 - `docs/legacy/`: historik (påverkar inte build/test/lint)
 - `docs/intake/`: tillfällig staging (exkluderas från lint/format)
+
+## 📐 Standarder
+- Dokumentationsstandard (ISO-inriktad): `docs/standards/DOCUMENTATION_STANDARD.md`
+- Arkiveringspolicy (Legacy): `docs/standards/ARCHIVING_POLICY.md`
+
+## 🛡️ Säkerhet
+- Översikt och policy: `docs/SECURITY.md`
+- Checklista: `docs/security/security_checklist.md`

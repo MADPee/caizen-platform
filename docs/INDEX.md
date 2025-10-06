@@ -1,6 +1,6 @@
 # CaiZen Docs Index
 
-Senast uppdaterad: 2025-10-02T08:45:27.621Z
+Senast uppdaterad: 2025-10-06T14:21:49.140Z
 
 ### Aktuell dokumentation (docs/current)
 - [caizen-build-safety-configs-2.txt](/docs/current/caizen-build-safety-configs-2.txt)
@@ -17,6 +17,8 @@ Senast uppdaterad: 2025-10-02T08:45:27.621Z
 - [caizen_vehicle_registration.ts](/docs/current/caizen_vehicle_registration.ts)
 - [org.caizen_caizen-v2-handover-doc.txt](/docs/current/org.caizen_caizen-v2-handover-doc.txt)
 - [org.caizen_caizen-v2-unified-dashboard.tsx](/docs/current/org.caizen_caizen-v2-unified-dashboard.tsx)
+- [org.caizen_mycarsjournal-spec-v3.md](/docs/current/org.caizen_mycarsjournal-spec-v3.md)
+- [org.caizen_tech-arch-v3.md](/docs/current/org.caizen_tech-arch-v3.md)
 - [test_CaiZen_doc.md](/docs/current/test_CaiZen_doc.md)
 - [test_CaiZen_script.sh](/docs/current/test_CaiZen_script.sh)
 - [test_caizen_autosamling.md](/docs/current/test_caizen_autosamling.md)
@@ -32,7 +34,10 @@ Senast uppdaterad: 2025-10-02T08:45:27.621Z
 
 ### Legacy (docs/legacy)
 - 2025-09-29-claude-artefacts (0 filer)
-- UNSORTED (15 filer)
+- UNSORTED (2 filer)
+- examples (5 filer)
+- notes (3 filer)
+- prototypes (3 filer)
 
 ### Intake (docs/intake)
 - [CLASSIFY_REVIEW.md](/docs/intake/CLASSIFY_REVIEW.md)
