@@ -15,6 +15,9 @@ from datetime import datetime
 import os
 import shutil
 import uuid
+import sys
+import re
+import time
 
 app = FastAPI(title="CaiZen OCR API", version="0.1.0")
 
@@ -29,6 +32,23 @@ app.add_middleware(
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data", "uploads")
 os.makedirs(DATA_DIR, exist_ok=True)
+
+# Optional external scripts root (local prototype). If available, we will use
+# real OCR + parsing; otherwise we fall back to a stubbed result.
+SCRIPTS_ROOT = os.environ.get(
+    "CAIZEN_OCR_SCRIPTS_ROOT",
+    "/Users/marcusanderssondipace/Library/Mobile Documents/com~apple~CloudDocs/BMW 118i_CAH643_WBAUM11070VH69821",
+)
+_HAS_EXTERNAL = False
+try:
+    if os.path.isdir(SCRIPTS_ROOT):
+        sys.path.insert(0, SCRIPTS_ROOT)
+        from scripts.classify_documents import ensure_ocr_text_exists  # type: ignore
+        from scripts.parse_inspection_and_import import build_inspection_from_file  # type: ignore
+
+        _HAS_EXTERNAL = True
+except Exception:
+    _HAS_EXTERNAL = False
 
 
 class ProcessingResult(BaseModel):
@@ -84,49 +104,36 @@ def _process_task(task_id: str) -> None:
             return
         task["status"] = "processing"
 
-        # TODO: Integrate real OCR and parsing here
-        # For now, produce a deterministic demo payload
+        started = time.time()
         filename = os.path.basename(task["file_path"]) or "document"
-        separated = {
-            "personalData": {
-                "customerName": None,
-                "driverLicenseInfo": None,
-                "contactInfo": None,
-                "paymentMethod": None,
-                "confidence": 0,
-            },
-            "vehicleData": {
-                "vin": None,
-                "registration": None,
-                "make": None,
-                "model": None,
-                "inspectionDate": None,
-                "nextInspectionDate": None,
-                "odometer": None,
-                "historicalOdometer": [],
-                "inspectionResult": None,
-                "brakeValues": None,
-                "obdTest": None,
-                "inspectionNotes": None,
-                "inspectionStation": None,
-                "confidence": 0,
-            },
-            "metadata": {
-                "documentType": "unknown",
-                "processingTime": "~1.0s",
-                "requiresManualReview": True,
-                "documentHash": f"sha256:{filename}",
-                "diaryNumber": None,
-            },
-        }
+
+        if _HAS_EXTERNAL:
+            # 1) Ensure OCR text exists (written under scripts' ROOT/ocr)
+            try:
+                ensure_ocr_text_exists(task["file_path"])  # type: ignore
+            except Exception:
+                pass
+            # 2) Build structured inspection data from image file
+            separated = _build_separated_from_external(task["file_path"], filename)
+            doc_type = "inspection_protocol" if separated.get("vehicleData", {}).get("inspectionResult") else "unknown"
+            conf = float(separated.get("vehicleData", {}).get("confidence") or 0)
+        else:
+            # Fallback stub
+            separated = _stub_separated(filename)
+            doc_type = "unknown"
+            conf = 0.0
+
+        elapsed = max(0.1, time.time() - started)
+        if "metadata" in separated:
+            separated["metadata"]["processingTime"] = f"{elapsed:.1f}s"
 
         task.update(
             {
                 "status": "completed",
-                "document_type": "unknown",
-                "confidence": 0.0,
+                "document_type": doc_type,
+                "confidence": conf,
                 "extracted_data": separated,
-                "manual_review_needed": True,
+                "manual_review_needed": not bool(conf),
                 "completed_at": datetime.utcnow().isoformat() + "Z",
             }
         )
@@ -134,6 +141,105 @@ def _process_task(task_id: str) -> None:
         task = tasks.setdefault(task_id, {})
         task["status"] = "failed"
         task["error"] = str(e)
+
+
+def _stub_separated(filename: str) -> Dict[str, Any]:
+    return {
+        "personalData": {
+            "customerName": None,
+            "driverLicenseInfo": None,
+            "contactInfo": None,
+            "paymentMethod": None,
+            "confidence": 0,
+        },
+        "vehicleData": {
+            "vin": None,
+            "registration": None,
+            "make": None,
+            "model": None,
+            "inspectionDate": None,
+            "nextInspectionDate": None,
+            "odometer": None,
+            "historicalOdometer": [],
+            "inspectionResult": None,
+            "brakeValues": None,
+            "obdTest": None,
+            "inspectionNotes": None,
+            "inspectionStation": None,
+            "confidence": 0,
+        },
+        "metadata": {
+            "documentType": "unknown",
+            "processingTime": "~1.0s",
+            "requiresManualReview": True,
+            "documentHash": f"sha256:{filename}",
+            "diaryNumber": None,
+        },
+    }
+
+
+def _extract_vin_and_reg(name: str) -> Dict[str, Optional[str]]:
+    # VIN: 17 alphanum uppercase
+    vin_match = re.search(r'\b([A-HJ-NPR-Z0-9]{17})\b', name)
+    vin = vin_match.group(1) if vin_match else None
+    # Swedish reg: 3 letters + 3 digits (basic)
+    reg_match = re.search(r'\b([A-ZÅÄÖ]{3}\d{3})\b', name)
+    reg = reg_match.group(1) if reg_match else None
+    return {"vin": vin, "registration": reg}
+
+
+def _build_separated_from_external(file_path: str, filename: str) -> Dict[str, Any]:
+    try:
+        ins = build_inspection_from_file(file_path)  # type: ignore
+    except Exception:
+        ins = None
+
+    vin_reg = _extract_vin_and_reg(filename)
+
+    vehicle = {
+        "vin": vin_reg.get("vin"),
+        "registration": vin_reg.get("registration"),
+        "make": None,
+        "model": None,
+        "inspectionDate": getattr(ins, "event_date", None) if ins else None,
+        "nextInspectionDate": None,
+        "odometer": getattr(ins, "odo_km", None) if ins else None,
+        "historicalOdometer": [],
+        "inspectionResult": getattr(ins, "result", None) if ins else None,
+        "brakeValues": {
+            "frontLeft": getattr(ins, "brake_fl_kn", None) or getattr(ins, "brake_fl", None),
+            "frontRight": getattr(ins, "brake_fr_kn", None) or getattr(ins, "brake_fr", None),
+            "rearLeft": getattr(ins, "brake_rl_kn", None) or getattr(ins, "brake_rl", None),
+            "rearRight": getattr(ins, "brake_rr_kn", None) or getattr(ins, "brake_rr", None),
+        } if ins else None,
+        "obdTest": None,
+        "inspectionNotes": getattr(ins, "notes", None) if ins else None,
+        "inspectionStation": {
+            "name": getattr(ins, "workshop_name", None) if ins else None,
+            "location": None,
+            "orgNumber": None,
+            "inspector": None,
+        },
+        "confidence": 75 if ins else 0,
+    }
+
+    return {
+        "personalData": {
+            "customerName": None,
+            "driverLicenseInfo": None,
+            "contactInfo": None,
+            "paymentMethod": None,
+            "confidence": 0,
+        },
+        "vehicleData": vehicle,
+        "metadata": {
+            "documentType": "inspection_protocol" if ins else "unknown",
+            "processingTime": None,
+            "requiresManualReview": False if ins else True,
+            "documentHash": f"sha256:{filename}",
+            "diaryNumber": None,
+        },
+    }
 
 
 @app.get("/api/process/{task_id}")
