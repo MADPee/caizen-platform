@@ -1,7 +1,8 @@
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Upload, FileText, Shield, Database, Lock, CheckCircle, AlertTriangle, Eye, EyeOff, Zap, Cpu, Clock } from 'lucide-react';
 import { Card, CardContent } from "@/components/ui/card";
+import { uploadDocument, getStatus, getResults } from "@/lib/api/ocrClient";
 
 const SmartOCRParser = () => {
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
@@ -12,130 +13,42 @@ const SmartOCRParser = () => {
   const [showPersonalData, setShowPersonalData] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Riktig OCR-data från Carspect besiktningsprotokoll
-  const mockOCRText = `
-Carspect
-
-Besiktningsprotokoll: KONTROLLBESIKTNING
-
-Regnr: JWS127
-Fabrikat: BMW 320d CAB M1
-Nationalitetsbeteckning: S
-Chassinummer: WBAWM3104DE139742
-Besiktning utförd: 2024-06-26
-Station: Karlstad Kökarlsbyvägen
-
-Nästa besiktning senast: 2025-08-31
-Diarienr: 9117 26 6 2024 07.58.41
-Vägmätarställning: 108863 km
-
-Historiska mätarställningar:
-2023-05-12: 103786 km
-2022-06-11: 101706 km
-2021-04-01: 99058 km
-
-Bra att veta:
-Alternativ kontrollmetod avgasrening, visuell kontroll (konstruktion)
-
-Broms Vänster Höger
-Fram  2.4     2.6
-Bak   2.2     2.1
-
-Resultat från OBD test:
-Deltester    3/3
-Antal felkoder: 0
-
-Besiktningsresultat: GODKÄND KONTROLLBESIKTNING
-
-Fordonet har besiktigats av: FORSDAN
-
-CARSPECT AB
-Org.nr: 556774-1110
-Ulvsundavägen 106 C, 16867 Bromma
-www.carspect.se
-
-Kundtjänst: 0771-44 22 33
-mail: info@carspect.se
-Företag säte: Stockholm
-Företaget innehar F-skattebevis
-  `;
+  const [taskId, setTaskId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const processDocument = async () => {
     setIsProcessing(true);
     setProcessingStep(0);
 
-    // Simulera OCR-process
-    const steps = [
-      { step: 1, message: "Läser dokument med OCR...", delay: 1000 },
-      { step: 2, message: "Identifierar datatyper...", delay: 800 },
-      { step: 3, message: "Separerar persondata från fordonsdata...", delay: 1200 },
-      { step: 4, message: "Krypterar känslig information...", delay: 700 },
-      { step: 5, message: "Sparar i separata domäner...", delay: 500 }
-    ];
+    try {
+      setError(null);
+      setProcessingStep(1);
+      const upload = await uploadDocument(uploadedFile);
+      setTaskId(upload.task_id);
+      setProcessingStep(2);
 
-    for (const stepInfo of steps) {
-      setProcessingStep(stepInfo.step);
-      await new Promise(resolve => setTimeout(resolve, stepInfo.delay));
-    }
-
-    // Simulera OCR-resultat
-    setOcrResult(mockOCRText);
-
-    // Simulera smart parsing för besiktningsprotokoll
-    const separated = {
-      personalData: {
-        customerName: "Mikael Brolin", // Härledd från köpare (ej i protokoll)
-        driverLicenseInfo: null, // Ingen persondata i besiktningsprotokoll
-        contactInfo: null,
-        paymentMethod: null,
-        confidence: 0 // Besiktningsprotokoll innehåller minimal persondata
-      },
-      vehicleData: {
-        vin: "WBAWM3104DE139742",
-        registration: "JWS127",
-        make: "BMW",
-        model: "320d CAB M1",
-        nationalityCode: "S",
-        inspectionDate: "2024-06-26",
-        nextInspectionDate: "2025-08-31",
-        odometer: 108863,
-        historicalOdometer: [
-          { date: "2023-05-12", reading: 103786 },
-          { date: "2022-06-11", reading: 101706 },
-          { date: "2021-04-01", reading: 99058 }
-        ],
-        inspectionResult: "GODKÄND KONTROLLBESIKTNING",
-        brakeValues: {
-          frontLeft: 2.4,
-          frontRight: 2.6,
-          rearLeft: 2.2,
-          rearRight: 2.1
-        },
-        obdTest: {
-          deltestsCompleted: "3/3",
-          errorCodes: 0,
-          passed: true
-        },
-        inspectionNotes: "Alternativ kontrollmetod avgasrening, visuell kontroll (konstruktion)",
-        inspectionStation: {
-          name: "Carspect AB",
-          location: "Karlstad Kökarlsbyvägen",
-          orgNumber: "556774-1110",
-          inspector: "FORSDAN"
-        },
-        confidence: 99
-      },
-      metadata: {
-        documentType: "inspection_protocol",
-        processingTime: "2.8s",
-        requiresManualReview: false,
-        documentHash: "sha256:carspect_jws127_20240626",
-        diaryNumber: "9117 26 6 2024 07.58.41"
+      // Poll status
+      let status = await getStatus(upload.task_id);
+      const start = Date.now();
+      while (status.status !== 'completed' && status.status !== 'failed' && Date.now() - start < 60000) {
+        await new Promise(r => setTimeout(r, 800));
+        status = await getStatus(upload.task_id);
+        setProcessingStep((prev) => Math.min(4, (prev || 2) + 1));
       }
-    };
 
-    setSeparatedData(separated);
-    setIsProcessing(false);
+      if (status.status !== 'completed') {
+        throw new Error('OCR processing did not complete in time');
+      }
+
+      setProcessingStep(5);
+      const result = await getResults(upload.task_id);
+      setOcrResult(null);
+      setSeparatedData(result.extracted_data || null);
+    } catch (e: any) {
+      setError(e?.message || 'OCR processing failed');
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -272,12 +185,12 @@ Företaget innehar F-skattebevis
               ))}
             </div>
 
-            {isProcessing && (
+            {(isProcessing || error) && (
               <div className="mt-4 p-4 bg-automotive-orange/10 rounded-lg">
                 <div className="flex items-center">
                   <Clock className="mr-2 text-automotive-orange" size={16} />
                   <span className="text-automotive-orange">
-                    Steg {processingStep}/5 - Intelligent AI-analys pågår...
+                    {error ? `Fel: ${error}` : `Steg ${processingStep}/5 - OCR-analys pågår...`}
                   </span>
                 </div>
               </div>

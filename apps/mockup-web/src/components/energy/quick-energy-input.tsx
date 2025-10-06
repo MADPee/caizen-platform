@@ -25,42 +25,8 @@ export function QuickEnergyInput() {
   const [selectedVehicleId, setSelectedVehicleId] = useState<string>("");
   const { toast } = useToast();
   
-  // Mock data - would come from user's vehicle registry
-  const userVehicles: Vehicle[] = [
-    {
-      id: "1",
-      name: "BMW 218i",
-      make: "BMW",
-      model: "218i GRAN TOURER",
-      fuelType: "gasoline",
-      registrationMasked: "MKN***",
-      lastConsumption: 7.2,
-      medianConsumption: 7.8,
-      unit: "l/100km"
-    },
-    {
-      id: "2", 
-      name: "Tesla Model 3",
-      make: "Tesla",
-      model: "Model 3",
-      fuelType: "electric",
-      registrationMasked: "ELK***",
-      lastConsumption: 16.5,
-      medianConsumption: 17.2,
-      unit: "kWh/100km"
-    },
-    {
-      id: "3",
-      name: "Toyota Prius",
-      make: "Toyota", 
-      model: "Prius",
-      fuelType: "hybrid",
-      registrationMasked: "HYB***",
-      lastConsumption: 4.1,
-      medianConsumption: 4.3,
-      unit: "l/100km"
-    }
-  ];
+  // Placeholder – kommer från backend när kopplat
+  const userVehicles: Vehicle[] = [];
 
   // Auto-select first vehicle if none selected
   if (!selectedVehicleId && userVehicles.length > 0) {
@@ -106,11 +72,17 @@ export function QuickEnergyInput() {
   return (
     <Card className="bg-automotive-darker border-automotive-orange/20 mb-6">
       <CardContent className="p-4">
-        <VehicleSelector 
-          vehicles={userVehicles}
-          selectedVehicleId={selectedVehicleId}
-          onVehicleChange={setSelectedVehicleId}
-        />
+        {userVehicles.length > 0 ? (
+          <VehicleSelector 
+            vehicles={userVehicles}
+            selectedVehicleId={selectedVehicleId}
+            onVehicleChange={setSelectedVehicleId}
+          />
+        ) : (
+          <div className="text-center text-automotive-silver py-6">
+            Inga registrerade fordon ännu.
+          </div>
+        )}
 
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>

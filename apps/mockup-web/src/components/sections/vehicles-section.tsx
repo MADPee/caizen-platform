@@ -8,59 +8,8 @@ import { Search, Filter, Plus } from "lucide-react";
 export function VehiclesSection() {
   const [searchTerm, setSearchTerm] = useState("");
 
-  // Mock data - in real app this would come from secure database
-  const vehicles = [
-    {
-      id: "1",
-      name: "Min BMW",
-      make: "BMW",
-      model: "M3",
-      year: 2023,
-      color: "Alpine White",
-      registrationMasked: "ABC***",
-      vinMasked: "WBA***********1234",
-      verificationStatus: true,
-      lastVerifiedAt: "2024-01-15",
-      fuelData: {
-        lastFuelDate: "2 dagar sedan",
-        nextServiceKm: 1200,
-        fuelConsumption: 7.2
-      }
-    },
-    {
-      id: "2", 
-      name: "Familje-Volvo",
-      make: "Volvo",
-      model: "XC90",
-      year: 2022,
-      color: "Crystal White",
-      registrationMasked: "XYZ***",
-      vinMasked: "YV1***********5678",
-      verificationStatus: true,
-      lastVerifiedAt: "2024-01-10",
-      fuelData: {
-        lastFuelDate: "1 dag sedan",
-        nextServiceKm: 850,
-        fuelConsumption: 8.5
-      }
-    },
-    {
-      id: "3",
-      name: "Sommarbil",
-      make: "Porsche",
-      model: "911",
-      year: 2021,
-      color: "Guards Red",
-      registrationMasked: "POR***",
-      vinMasked: "WP0***********9012",
-      verificationStatus: false,
-      fuelData: {
-        lastFuelDate: "1 vecka sedan",
-        nextServiceKm: 2500,
-        fuelConsumption: 10.1
-      }
-    }
-  ];
+  // Tom lista – fylls från backend vid integration
+  const vehicles: any[] = [];
 
   const filteredVehicles = vehicles.filter(vehicle =>
     vehicle.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -102,18 +51,18 @@ export function VehiclesSection() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-        {filteredVehicles.map((vehicle) => (
-          <VehicleCard
-            key={vehicle.id}
-            vehicle={vehicle}
-            onViewDetails={(id) => console.log("View details for:", id)}
-            onManage={(id) => console.log("Manage vehicle:", id)}
-          />
-        ))}
-      </div>
-
-      {filteredVehicles.length === 0 && (
+      {filteredVehicles.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+          {filteredVehicles.map((vehicle) => (
+            <VehicleCard
+              key={vehicle.id}
+              vehicle={vehicle}
+              onViewDetails={(id) => console.log("View details for:", id)}
+              onManage={(id) => console.log("Manage vehicle:", id)}
+            />
+          ))}
+        </div>
+      ) : (
         <div className="text-center py-12">
           <div className="w-24 h-24 mx-auto mb-4 gauge-border">
             <div className="gauge-inner flex items-center justify-center">

@@ -71,3 +71,13 @@ Yes, you can!
 To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
 Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+
+---
+
+## OCR API (dev)
+
+Set `VITE_OCR_API_URL` before starting dev to enable backend OCR:
+
+```bash
+VITE_OCR_API_URL=http://localhost:8000 npm run dev
+```

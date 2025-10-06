@@ -14,69 +14,8 @@ interface VehicleListingsProps {
   };
 }
 
-// Mockdata för marknadsplats med säkra, maskerade identifierare
-const mockListings = [
-  {
-    id: "1",
-    title: "BMW M3 E46 2002 - Välskött entusiast-ägd",
-    price: 285000,
-    location: "Stockholm",
-    registrationMasked: "ABC***",
-    vinMasked: "WBA***********1234",
-    verificationStatus: "verified" as const,
-    hasServiceHistory: true,
-    documentationScore: 95,
-    photoCount: 12,
-    brand: "BMW",
-    year: 2002,
-    mileage: 145000,
-    fuelType: "Bensin",
-    transmission: "Manuell",
-    description: "Exceptionellt välskött M3 med komplett servicehistorik. Originallack, inga olyckor.",
-    features: ["Originalfärg", "Servicebok", "Inga olyckor", "Entusiast-ägd"],
-    distance: 15
-  },
-  {
-    id: "2", 
-    title: "Volvo V70 2018 - Familjevänlig & säker",
-    price: 420000,
-    location: "Göteborg",
-    registrationMasked: "DEF***",
-    vinMasked: "YV1***********5678",
-    verificationStatus: "partial" as const,
-    hasServiceHistory: true,
-    documentationScore: 78,
-    photoCount: 8,
-    brand: "Volvo",
-    year: 2018,
-    mileage: 89000,
-    fuelType: "Diesel",
-    transmission: "Automat",
-    description: "Perfekt familjekombi med låg miltal. Välservad hos auktoriserad verkstad.",
-    features: ["Låg miltal", "Automat", "Dragkrok", "Sommardäck ingår"],
-    distance: 45
-  },
-  {
-    id: "3",
-    title: "Audi A4 Avant 2020 - Som ny",
-    price: 485000,
-    location: "Malmö", 
-    registrationMasked: "GHI***",
-    vinMasked: "WAU***********9012",
-    verificationStatus: "verified" as const,
-    hasServiceHistory: true,
-    documentationScore: 92,
-    photoCount: 15,
-    brand: "Audi",
-    year: 2020,
-    mileage: 32000,
-    fuelType: "Bensin",
-    transmission: "Automat",
-    description: "Nästan ny A4 Avant med full utrustning. Endast en ägare, garangi kvar.",
-    features: ["En ägare", "Garanti", "Full utrustning", "Metallic"],
-    distance: 78
-  }
-];
+// Tom lista initialt – fylls från backend vid integration
+const mockListings: any[] = [];
 
 export function VehicleListings({ searchQuery, filters }: VehicleListingsProps) {
   const [sortBy, setSortBy] = useState("price-low");
@@ -149,14 +88,14 @@ export function VehicleListings({ searchQuery, filters }: VehicleListingsProps) 
         </select>
       </div>
 
-      {/* Listings grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-        {sortedListings.map((listing) => (
-          <ListingCard key={listing.id} listing={listing} />
-        ))}
-      </div>
-
-      {sortedListings.length === 0 && (
+      {/* Listings */}
+      {sortedListings.length > 0 ? (
+        <div className="grid grid-cols-1 lg:grid-cols-2 xl-grid-cols-3 gap-6">
+          {sortedListings.map((listing) => (
+            <ListingCard key={listing.id} listing={listing} />
+          ))}
+        </div>
+      ) : (
         <div className="text-center py-12">
           <Car className="w-16 h-16 text-automotive-silver mx-auto mb-4" />
           <h3 className="text-lg font-semibold text-white mb-2">Inga fordon hittades</h3>
