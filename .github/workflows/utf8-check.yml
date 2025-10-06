@@ -1,0 +1,19 @@
+name: UTF-8 Validation
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  utf8:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+      - run: npm ci
+      - name: Validate UTF-8 and BOM
+        run: node scripts/check-utf8.mjs
