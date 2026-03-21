@@ -573,6 +573,85 @@ export type UpdateType<T> = PartialExcept<
 >;
 
 // ====================================
+// UNDERHÅLL & REKOMMENDATION TYPES
+// ====================================
+
+export type MaintenanceCategory =
+  | "oil_change"
+  | "brake_service"
+  | "tire_rotation"
+  | "timing_belt"
+  | "coolant_flush"
+  | "transmission_service"
+  | "pcv_service"
+  | "spark_plugs"
+  | "general_inspection";
+
+export type OilViscosity =
+  | "0W-20"
+  | "0W-30"
+  | "5W-30"
+  | "5W-40"
+  | "10W-40"
+  | "15W-50";
+
+export type OilType = "full_synthetic" | "semi_synthetic" | "mineral";
+
+export type ACEAClass = "A1/B1" | "A3/B3" | "A3/B4" | "A5/B5" | "C2" | "C3";
+
+export interface OilRecommendation {
+  readonly brand: string;
+  readonly product: string;
+  readonly viscosity: OilViscosity;
+  readonly oilType: OilType;
+  readonly aceaClass: ACEAClass;
+  readonly apiRating: string;
+  readonly highMileage: boolean;
+  readonly sealConditioner: boolean;
+  readonly estimatedPriceSEK: {
+    readonly min: number;
+    readonly max: number;
+    readonly per: "liter" | "5L";
+  };
+  readonly pros: string[];
+  readonly cons: string[];
+  readonly rating: number;
+}
+
+export interface MaintenanceRecommendation {
+  readonly id: string;
+  readonly vehicleId: string;
+  readonly category: MaintenanceCategory;
+  readonly title: string;
+  readonly description: string;
+  readonly urgency: "low" | "medium" | "high" | "critical";
+  readonly basedOnMileage: number;
+  readonly basedOnVehicleAge: number;
+  readonly recommendedInterval: {
+    readonly km: number;
+    readonly months: number;
+  };
+  readonly oilRecommendations?: OilRecommendation[];
+  readonly estimatedCostSEK: {
+    readonly min: number;
+    readonly max: number;
+  };
+  readonly relatedIssues: string[];
+  readonly sources: string[];
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}
+
+export interface MaintenanceSchedule {
+  readonly vehicleId: string;
+  readonly recommendations: MaintenanceRecommendation[];
+  readonly nextServiceDate: Date;
+  readonly nextServiceMileage: number;
+  readonly overallHealthScore: number;
+  readonly warnings: string[];
+}
+
+// ====================================
 // CONSTANTS
 // ====================================
 
