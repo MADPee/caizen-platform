@@ -10,6 +10,21 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
 
 ### ✨ Tillagt
 
+- **Prisjämförelse-feature** — Komplett prisinformations-modul med sökning,
+  indexering och jämförelse av fordonsdelar från svenska butiker
+  - `PriceDashboard` — Huvudvy med statistik och sökresultat
+  - `PriceSearch` — Avancerat sökformulär med filter (kategori, märke,
+    viskositet, max pris, i lager, rea) och snabbsök
+  - `PriceResults` — Detaljerade produktkort med prislistor per butik,
+    rea-markering, pristrend och direktlänkar
+  - `PriceService` — Indexeringsmotor med mock-data från 7 svenska butiker
+    (Biltema, Mekonomen, Skruvat, AK24, Weboil, AutoExperten, Motonet)
+  - `usePriceSearch` — React hook med state management, sortering och
+    prishistorik
+- **Pristyper** — TypeScript-typer för prisindexering: `Product`,
+  `PriceEntry`, `Retailer`, `PriceSearchQuery`, `PriceSearchResult`,
+  `PriceHistory`, `PriceAlert` m.fl.
+- **Navigation** — App-navigation mellan Fordon och Prisjämförelse
 - **UC001: Motorolja för Volvo XC90 2.5T** — Komplett use case med forskningsanalys
   för optimalt oljeval vid 350 000 km (docs/use-cases/)
 - **UC001: Inköpsguide Sverige** — Prisjämförelse med fysiska butiker, onlinebutiker,
@@ -22,6 +37,7 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
 
 ### 🔧 Ändrat
 
+- **App.tsx** — Ny navigation med flikar (Fordon / Prisjämförelse), version 2.1
 - **docs/README.md** — Uppdaterad med use case-sektion och länk till UC001
 
 ---

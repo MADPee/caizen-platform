@@ -652,6 +652,163 @@ export interface MaintenanceSchedule {
 }
 
 // ====================================
+// PRISINDEXERING & PRISJÄMFÖRELSE TYPES
+// ====================================
+
+export type ProductCategory =
+  | "motor_oil"
+  | "oil_filter"
+  | "brake_pads"
+  | "brake_discs"
+  | "tires"
+  | "wiper_blades"
+  | "air_filter"
+  | "cabin_filter"
+  | "spark_plugs"
+  | "coolant"
+  | "transmission_fluid"
+  | "battery"
+  | "other";
+
+export type RetailerType = "online" | "physical" | "both";
+
+export type PriceTrend = "rising" | "stable" | "falling" | "unknown";
+
+export type Currency = "SEK" | "EUR" | "NOK" | "DKK";
+
+export interface Retailer {
+  readonly id: string;
+  readonly name: string;
+  readonly url?: string;
+  readonly type: RetailerType;
+  readonly logoUrl?: string;
+  readonly country: "SE" | "NO" | "DK" | "FI" | "DE";
+  readonly shippingCostSEK?: number;
+  readonly freeShippingThresholdSEK?: number;
+  readonly pickupAvailable: boolean;
+  readonly pickupTimeHours?: number;
+  readonly trustScore: number;
+  readonly reviewCount: number;
+}
+
+export interface PriceEntry {
+  readonly id: string;
+  readonly productId: string;
+  readonly retailerId: string;
+  readonly retailer: Retailer;
+  readonly priceSEK: number;
+  readonly originalPrice?: number;
+  readonly currency: Currency;
+  readonly isOnSale: boolean;
+  readonly salePercentage?: number;
+  readonly inStock: boolean;
+  readonly stockQuantity?: number;
+  readonly url: string;
+  readonly lastVerified: Date;
+  readonly pricePerUnit?: number;
+  readonly unitSize: string;
+}
+
+export interface Product {
+  readonly id: string;
+  readonly name: string;
+  readonly brand: string;
+  readonly category: ProductCategory;
+  readonly description: string;
+  readonly specifications: Record<string, string>;
+  readonly imageUrl?: string;
+  readonly ean?: string;
+  readonly partNumber?: string;
+  readonly compatibleVehicles: VehicleCompatibility[];
+  readonly prices: PriceEntry[];
+  readonly lowestPrice: number;
+  readonly highestPrice: number;
+  readonly averagePrice: number;
+  readonly pricePerLiter?: number;
+  readonly priceTrend: PriceTrend;
+  readonly lastUpdated: Date;
+  readonly rating?: number;
+  readonly reviewCount?: number;
+}
+
+export interface VehicleCompatibility {
+  readonly make: string;
+  readonly model?: string;
+  readonly yearFrom?: number;
+  readonly yearTo?: number;
+  readonly engineCode?: string;
+}
+
+export interface PriceSearchQuery {
+  readonly query: string;
+  readonly category?: ProductCategory;
+  readonly brand?: string;
+  readonly vehicleMake?: string;
+  readonly vehicleModel?: string;
+  readonly vehicleYear?: number;
+  readonly engineCode?: string;
+  readonly viscosity?: OilViscosity;
+  readonly aceaClass?: ACEAClass;
+  readonly maxPriceSEK?: number;
+  readonly minPriceSEK?: number;
+  readonly onlyInStock?: boolean;
+  readonly onlyOnSale?: boolean;
+  readonly sortBy: PriceSortOption;
+  readonly sortOrder: "asc" | "desc";
+  readonly retailers?: string[];
+  readonly country?: "SE" | "NO" | "DK" | "FI" | "DE";
+}
+
+export type PriceSortOption =
+  | "price_lowest"
+  | "price_highest"
+  | "price_per_unit"
+  | "rating"
+  | "relevance"
+  | "retailer_trust"
+  | "last_updated";
+
+export interface PriceSearchResult {
+  readonly query: PriceSearchQuery;
+  readonly products: Product[];
+  readonly totalResults: number;
+  readonly searchTime: number;
+  readonly retailers: Retailer[];
+  readonly priceRange: {
+    readonly min: number;
+    readonly max: number;
+    readonly average: number;
+  };
+  readonly lastUpdated: Date;
+}
+
+export interface PriceAlert {
+  readonly id: string;
+  readonly userId: string;
+  readonly productId: string;
+  readonly targetPriceSEK: number;
+  readonly currentPriceSEK: number;
+  readonly isTriggered: boolean;
+  readonly triggeredAt?: Date;
+  readonly createdAt: Date;
+  readonly active: boolean;
+}
+
+export interface PriceHistory {
+  readonly productId: string;
+  readonly retailerId: string;
+  readonly entries: Array<{
+    readonly date: Date;
+    readonly priceSEK: number;
+  }>;
+  readonly trend: PriceTrend;
+  readonly lowestEver: number;
+  readonly highestEver: number;
+  readonly lowestEverDate: Date;
+  readonly highestEverDate: Date;
+}
+
+// ====================================
 // CONSTANTS
 // ====================================
 
