@@ -12,6 +12,8 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
 
 - **UC001: Motorolja för Volvo XC90 2.5T** — Komplett use case med forskningsanalys
   för optimalt oljeval vid 350 000 km (docs/use-cases/)
+- **UC001: Inköpsguide Sverige** — Prisjämförelse med fysiska butiker, onlinebutiker,
+  totalkostnad per oljebyte och köpstrategi (uppdatering mars 2026)
 - **MaintenanceRecommendation types** — TypeScript-typer för underhållsrekommendationer,
   oljespecifikationer och servicescheman (src/types/index.ts)
 - **Use cases-katalog** — Ny dokumentationssektion för verkliga fordons-use-cases

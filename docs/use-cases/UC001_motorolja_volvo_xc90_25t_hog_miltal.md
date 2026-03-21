@@ -289,6 +289,129 @@ p.g.a. motorns ålder och slitage.
 
 ---
 
+## 🛒 Inköpsguide Sverige — Var Köper Man?
+
+_Priser uppdaterade: mars 2026. Alla priser inkl. moms._
+
+### 🏪 Fysiska Butiker
+
+| Butik             | Sortiment                        | Fördel                        | Nackdel                     |
+| ----------------- | -------------------------------- | ----------------------------- | --------------------------- |
+| **Biltema**       | Eget märke 5W-40, Castrol, Mobil | Bra pris, köp & hämta inom 2h | Begränsat premium-sortiment |
+| **Mekonomen**     | Castrol, eget märke, Mobil       | Brett sortiment, rådgivning   | Högre priser                |
+| **AutoExperten**  | Castrol, Liqui Moly, Valvoline   | Bra urval                     | Varierar mellan butiker     |
+| **Jula**          | Eget märke, Castrol              | Budget-vänligt                | Mindre specialiserat        |
+| **Bilverkstäder** | Alla märken                      | Professionell rådgivning      | Högst pris (arbete + olja)  |
+
+### 🌐 Onlinebutiker (Bäst Pris)
+
+| Butik              | URL            | Frakt          | Kommentar                               |
+| ------------------ | -------------- | -------------- | --------------------------------------- |
+| **Skruvat.se**     | skruvat.se     | Från 49 kr     | Stort sortiment, bra priser             |
+| **AK24.se**        | ak24.se        | Från 200 kr    | Bra priser, 2–3 dagars leverans         |
+| **Weboil.se**      | weboil.se      | Varierar       | Marknadsför sig som billigast i Sverige |
+| **Prisjakt.nu**    | prisjakt.nu    | Jämförelsesajt | Jämför priser från 20+ butiker          |
+| **PriceRunner.se** | pricerunner.se | Jämförelsesajt | Jämför priser med recensioner           |
+
+### 💰 Prisjämförelse per Olja (Mars 2026)
+
+#### 1. Valvoline MaxLife 5W-40 (Primär Rekommendation)
+
+| Förpackning | Pris        | Butik                 | kr/liter         |
+| ----------- | ----------- | --------------------- | ---------------- |
+| 1L          | ~121 kr     | AK24.se               | 121 kr/L         |
+| 1L          | ~158 kr     | PriceRunner (snitt)   | 158 kr/L         |
+| 4L          | ~390–404 kr | AK24.se / PriceRunner | **~98–101 kr/L** |
+
+> 💡 **Tips:** Köp 4L + 2×1L = 6L (täcker 5,8L kapacitet + lite extra).
+> Totalkostnad: ~640 kr.
+
+#### 2. Castrol EDGE 5W-40 A3/B4
+
+| Förpackning | Pris    | Butik               | kr/liter      |
+| ----------- | ------- | ------------------- | ------------- |
+| 1L          | ~149 kr | Weboil.se (rea)     | 149 kr/L      |
+| 1L          | ~195 kr | Skruvat.se          | 195 kr/L      |
+| 4L          | ~445 kr | AK24.se (18% rea)   | **~111 kr/L** |
+| 4L          | ~693 kr | PriceRunner (snitt) | ~173 kr/L     |
+
+> 💡 **Tips:** AK24.se har ofta rea — håll utkik! Köp 4L + 2×1L.
+> Bästa totalkostnad: ~745 kr.
+
+#### 3. Liqui Moly Leichtlauf High Tech 5W-40
+
+| Förpackning | Pris    | Butik            | kr/liter      |
+| ----------- | ------- | ---------------- | ------------- |
+| 1L          | ~121 kr | Winparts.se      | 121 kr/L      |
+| 1L          | ~155 kr | Prisjakt (snitt) | 155 kr/L      |
+| 1L          | ~165 kr | Skruvat.se       | 165 kr/L      |
+| 5L          | ~669 kr | Prisjakt         | **~134 kr/L** |
+
+> 💡 **Tips:** 5L-dunken räcker nästan — köp 5L + 1L.
+> Totalkostnad: ~790 kr.
+
+#### 4. Mobil 1 FS 5W-40
+
+| Förpackning | Pris    | Butik     | kr/liter      |
+| ----------- | ------- | --------- | ------------- |
+| 5L          | ~743 kr | Weboil.se | **~149 kr/L** |
+
+> 💡 **Tips:** Dyraste alternativet. Köp 5L + 1L.
+> Totalkostnad: ~900 kr.
+
+#### 5. Liqui Moly MoS2 Leichtlauf 10W-40 (Budget)
+
+| Förpackning | Pris    | Butik                | kr/liter     |
+| ----------- | ------- | -------------------- | ------------ |
+| 5L          | ~350 kr | Diverse (uppskattat) | **~70 kr/L** |
+
+> 💡 **Tips:** Billigast per liter, men bara som sommarolja i Norden.
+> Totalkostnad: ~420 kr.
+
+### 🏷️ Budget-alternativ: Biltemas Eget Märke 5W-40
+
+| Förpackning | Pris                   | ACEA             | Kommentar      |
+| ----------- | ---------------------- | ---------------- | -------------- |
+| 1L          | ~100 kr                | A3/B3, A3/B4, C3 | Helsyntetisk   |
+| 4L          | ~300 kr (uppskattning) | A3/B3, A3/B4     | Finns i butik  |
+| 10L         | ~600 kr (uppskattning) | A3/B3, A3/B4     | Bäst literpris |
+
+> ⚠️ Biltemas olja uppfyller ACEA A3/B4 och fungerar tekniskt, men saknar
+> high-mileage-tillsatser. Kan komplettera med separat tätningskonditionerare.
+
+### 📊 Totalkostnad per Oljebyte (6 liter = kapacitet + marginal)
+
+| Olja                        | Bästa pris/6L | Oljefilter (~80 kr) | **Totalt**  |
+| --------------------------- | ------------- | ------------------- | ----------- |
+| Biltema Eget Märke 5W-40    | ~450 kr       | 80 kr               | **~530 kr** |
+| Liqui Moly MoS2 10W-40      | ~420 kr       | 80 kr               | **~500 kr** |
+| **Valvoline MaxLife 5W-40** | **~640 kr**   | **80 kr**           | **~720 kr** |
+| Castrol EDGE 5W-40          | ~745 kr       | 80 kr               | **~825 kr** |
+| Liqui Moly HT 5W-40         | ~790 kr       | 80 kr               | **~870 kr** |
+| Mobil 1 FS 5W-40            | ~900 kr       | 80 kr               | **~980 kr** |
+
+### 🔧 Oljefilter
+
+Originalfilter till B5254T2:
+
+| Filter                 | Artikelnummer | Pris (ca) | Butik               |
+| ---------------------- | ------------- | --------- | ------------------- |
+| Mann-Filter HU 719/8 x | HU 719/8 x    | ~70–90 kr | Skruvat.se, AK24.se |
+| Mahle OX 371D          | OX 371D       | ~65–85 kr | Mekonomen, Biltema  |
+| Bosch P 9249           | F 026 407 249 | ~60–80 kr | Biltema, Jula       |
+
+> 💡 **Byt ALLTID oljefilter vid varje oljebyte.**
+
+### 🎯 Bästa Köpstrategi
+
+1. **Jämför först** på Prisjakt.nu eller PriceRunner.se
+2. **Köp Valvoline MaxLife 5W-40 (4L + 2×1L)** online via AK24.se eller Skruvat.se
+3. **Oljefilter** — köp Mann-Filter HU 719/8 x (bäst kvalitet/pris)
+4. **Håll utkik efter rea** — Castrol EDGE går ofta på kampanj
+5. **Biltema** för snabbt köp samma dag (köp & hämta inom 2 timmar)
+
+---
+
 ## 🔗 CaiZen-integration
 
 ### Koppling till Plattformen
@@ -320,9 +443,13 @@ Detta use case demonstrerar hur CaiZen kan stödja fordonsägare med:
 5. Liqui Moly — Produktspecifikationer Leichtlauf High Tech 5W-40
 6. Castrol — EDGE 5W-40 A3/B4 Produktblad
 7. OilType.co — Volvo XC90 2004 Oil Type
+8. Prisjakt.nu — Prisjämförelse motoroljor 5W-40 (mars 2026)
+9. PriceRunner.se — Castrol EDGE / Valvoline MaxLife priser
+10. AK24.se, Skruvat.se, Weboil.se — Onlinepriser (mars 2026)
+11. Biltema.se — Helsyntetisk motorolja 5W-40 ACEA A3/B4
 
 ---
 
 _📅 Senast uppdaterad: 2026-03-21_
-_🔖 Tags: volvo, xc90, b5254t2, motorolja, high-mileage, 5w-40, underhåll_
+_🔖 Tags: volvo, xc90, b5254t2, motorolja, high-mileage, 5w-40, underhåll, inköp, priser, sverige_
 _📁 CaiZen Use Case UC001_
