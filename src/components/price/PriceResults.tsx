@@ -152,6 +152,22 @@ function PriceRow({
           {price.inStock ? "I lager" : "Slut"}
         </span>
 
+        {price.verified ? (
+          <span
+            className="flex items-center gap-0.5 text-[10px] text-green-400 bg-green-900/30 px-1.5 py-0.5 rounded"
+            title={price.verifiedSource ?? "Verifierat pris"}
+          >
+            ✓ Verifierat
+          </span>
+        ) : (
+          <span
+            className="text-[10px] text-yellow-500 bg-yellow-900/20 px-1.5 py-0.5 rounded"
+            title="Pris ej verifierat — kontrollera hos butiken"
+          >
+            ⚠ Ej verifierat
+          </span>
+        )}
+
         {onAddToList && (
           <button
             onClick={handleAdd}
@@ -195,7 +211,7 @@ function ProductCard({
   const sortedPrices = [...product.prices].sort(
     (a, b) => a.priceSEK - b.priceSEK,
   );
-  const cheapest = sortedPrices[0];
+  const hasPrices = sortedPrices.length > 0;
   const savingsVsMax = product.highestPrice - product.lowestPrice;
 
   return (
@@ -250,10 +266,14 @@ function ProductCard({
           </div>
 
           <div className="flex-shrink-0 text-right">
-            <div className="text-lg font-bold text-white">
-              {formatSEK(product.lowestPrice)}
-            </div>
-            {product.pricePerLiter && (
+            {hasPrices ? (
+              <div className="text-lg font-bold text-white">
+                {formatSEK(product.lowestPrice)}
+              </div>
+            ) : (
+              <div className="text-sm text-gray-500 italic">Pris saknas</div>
+            )}
+            {hasPrices && product.pricePerLiter && (
               <div className="text-xs text-gray-400">
                 {Math.round(product.pricePerLiter)} kr/liter
               </div>
@@ -278,29 +298,41 @@ function ProductCard({
 
         {/* Prissammanfattning (alltid synlig) */}
         <div className="flex items-center gap-4 mt-3 text-xs text-gray-400">
-          <span className="flex items-center gap-1">
-            <ShoppingCart size={12} />
-            {product.prices.length} butiker
-          </span>
-          <span className="flex items-center gap-1">
-            <Package size={12} />
-            Från {formatSEK(product.lowestPrice)} till{" "}
-            {formatSEK(product.highestPrice)}
-          </span>
-          {savingsVsMax > 0 && (
-            <span className="text-green-400">
-              Spara upp till {formatSEK(savingsVsMax)}
+          {hasPrices ? (
+            <>
+              <span className="flex items-center gap-1">
+                <ShoppingCart size={12} />
+                {product.prices.length}{" "}
+                {product.prices.length === 1 ? "butik" : "butiker"}
+              </span>
+              <span className="flex items-center gap-1">
+                <Package size={12} />
+                {product.lowestPrice === product.highestPrice
+                  ? formatSEK(product.lowestPrice)
+                  : `Från ${formatSEK(product.lowestPrice)} till ${formatSEK(product.highestPrice)}`}
+              </span>
+              {savingsVsMax > 0 && (
+                <span className="text-green-400">
+                  Spara upp till {formatSEK(savingsVsMax)}
+                </span>
+              )}
+            </>
+          ) : (
+            <span className="text-yellow-500 italic">
+              Inga verifierade priser — kontrollera hos återförsäljare
             </span>
           )}
-          <span className="ml-auto flex items-center gap-1 text-blue-400">
-            {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-            {expanded ? "Dölj" : "Visa"} priser
-          </span>
+          {hasPrices && (
+            <span className="ml-auto flex items-center gap-1 text-blue-400">
+              {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+              {expanded ? "Dölj" : "Visa"} priser
+            </span>
+          )}
         </div>
       </div>
 
       {/* Expanderade priser */}
-      {expanded && (
+      {expanded && hasPrices && (
         <div className="border-t border-gray-700 p-3 space-y-1 bg-gray-850">
           {sortedPrices.map((price) => (
             <PriceRow
@@ -312,10 +344,10 @@ function ProductCard({
             />
           ))}
 
-          {cheapest && cheapest.retailer.freeShippingThresholdSEK && (
+          {sortedPrices[0]?.retailer.freeShippingThresholdSEK && (
             <div className="text-[10px] text-gray-500 mt-2 px-3">
-              Fri frakt hos {cheapest.retailer.name} vid köp över{" "}
-              {formatSEK(cheapest.retailer.freeShippingThresholdSEK)}
+              Fri frakt hos {sortedPrices[0].retailer.name} vid köp över{" "}
+              {formatSEK(sortedPrices[0].retailer.freeShippingThresholdSEK!)}
             </div>
           )}
         </div>

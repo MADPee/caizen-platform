@@ -707,6 +707,8 @@ export interface PriceEntry {
   readonly lastVerified: Date;
   readonly pricePerUnit?: number;
   readonly unitSize: string;
+  readonly verified: boolean;
+  readonly verifiedSource?: string;
 }
 
 export interface Product {
