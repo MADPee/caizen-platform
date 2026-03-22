@@ -15,8 +15,10 @@ import {
 import PriceSearch from "./PriceSearch";
 import PriceResults from "./PriceResults";
 import { usePriceSearch } from "../../lib/hooks/usePriceSearch";
+import type { Product, PriceEntry } from "../../types";
 
 interface PriceDashboardProps {
+  onAddToList?: (product: Product, price: PriceEntry) => void;
   className?: string;
 }
 
@@ -29,7 +31,10 @@ function formatSEK(amount: number): string {
   }).format(amount);
 }
 
-const PriceDashboard: React.FC<PriceDashboardProps> = ({ className = "" }) => {
+const PriceDashboard: React.FC<PriceDashboardProps> = ({
+  onAddToList,
+  className = "",
+}) => {
   const {
     result,
     isLoading,
@@ -159,7 +164,9 @@ const PriceDashboard: React.FC<PriceDashboardProps> = ({ className = "" }) => {
       )}
 
       {/* Resultat */}
-      {!isLoading && result && <PriceResults result={result} />}
+      {!isLoading && result && (
+        <PriceResults result={result} onAddToList={onAddToList} />
+      )}
 
       {/* Tomt tillstånd */}
       {!isLoading && !result && !error && (

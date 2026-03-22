@@ -1,14 +1,28 @@
 import { useState } from "react";
 import VehicleRegistration from "./components/vehicle/VehicleRegistration";
 import PriceDashboard from "./components/price/PriceDashboard";
+import ShoppingListView from "./components/shopping/ShoppingListView";
+import { useShoppingList } from "./lib/hooks/useShoppingList";
 import type { Vehicle, CreateType } from "./types";
-import { Car, BarChart3 } from "lucide-react";
+import { Car, BarChart3, ShoppingCart, CheckCircle, X } from "lucide-react";
 
-type AppView = "vehicles" | "prices";
+type AppView = "vehicles" | "prices" | "shopping";
 
 function App() {
   const [vehicles, setVehicles] = useState<Vehicle[]>([]);
   const [currentView, setCurrentView] = useState<AppView>("vehicles");
+
+  const {
+    activeList,
+    isLoading: isShoppingLoading,
+    itemCount,
+    notification,
+    addToList,
+    updateItemStatus,
+    updateItemQuantity,
+    removeItem,
+    clearNotification,
+  } = useShoppingList();
 
   const handleVehicleCreated = async (vehicleData: CreateType<Vehicle>) => {
     console.log("Nytt fordon registrerat:", vehicleData);
@@ -69,10 +83,48 @@ function App() {
                 <BarChart3 size={16} />
                 Prisjämförelse
               </button>
+              <button
+                onClick={() => setCurrentView("shopping")}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors relative ${
+                  currentView === "shopping"
+                    ? "bg-orange-600/20 text-orange-400 font-medium"
+                    : "text-gray-400 hover:text-white hover:bg-gray-800"
+                }`}
+              >
+                <ShoppingCart size={16} />
+                Inköpslista
+                {itemCount > 0 && (
+                  <span className="absolute -top-1 -right-1 h-5 w-5 bg-orange-500 rounded-full text-[10px] flex items-center justify-center text-white font-bold">
+                    {itemCount}
+                  </span>
+                )}
+              </button>
             </nav>
           </div>
         </div>
       </header>
+
+      {/* Notification toast */}
+      {notification && (
+        <div className="fixed top-20 right-4 z-50 animate-slide-up">
+          <div
+            className={`flex items-center gap-2 px-4 py-3 rounded-lg shadow-lg border ${
+              notification.type === "success"
+                ? "bg-green-900/90 border-green-700 text-green-300"
+                : "bg-red-900/90 border-red-700 text-red-300"
+            }`}
+          >
+            <CheckCircle size={16} />
+            <span className="text-sm">{notification.message}</span>
+            <button
+              onClick={clearNotification}
+              className="ml-2 text-gray-400 hover:text-white"
+            >
+              <X size={14} />
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
@@ -129,14 +181,26 @@ function App() {
             </>
           )}
 
-          {currentView === "prices" && <PriceDashboard />}
+          {currentView === "prices" && (
+            <PriceDashboard onAddToList={addToList} />
+          )}
+
+          {currentView === "shopping" && (
+            <ShoppingListView
+              list={activeList}
+              onUpdateStatus={updateItemStatus}
+              onUpdateQuantity={updateItemQuantity}
+              onRemoveItem={removeItem}
+              isLoading={isShoppingLoading}
+            />
+          )}
         </div>
       </main>
 
       {/* Footer */}
       <footer className="border-t border-gray-800 mt-16 py-8">
         <div className="container mx-auto px-4 text-center text-gray-400 text-sm">
-          <p>CaiZen Platform v2.1 - Säker fordonshantering</p>
+          <p>CaiZen Platform v2.2 - Säker fordonshantering</p>
         </div>
       </footer>
     </div>

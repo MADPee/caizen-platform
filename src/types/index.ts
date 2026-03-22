@@ -809,6 +809,54 @@ export interface PriceHistory {
 }
 
 // ====================================
+// INKÖPSLISTA TYPES
+// ====================================
+
+export type ShoppingListItemStatus =
+  | "pending"
+  | "purchased"
+  | "skipped"
+  | "out_of_stock";
+
+export interface ShoppingListItem {
+  readonly id: string;
+  readonly productId: string;
+  readonly productName: string;
+  readonly brand: string;
+  readonly category: ProductCategory;
+  readonly specifications: Record<string, string>;
+  readonly selectedRetailerId: string;
+  readonly selectedRetailerName: string;
+  readonly selectedPriceSEK: number;
+  readonly quantity: number;
+  readonly unitSize: string;
+  readonly totalPriceSEK: number;
+  readonly url: string;
+  readonly articleNumber?: string;
+  readonly status: ShoppingListItemStatus;
+  readonly notes?: string;
+  readonly addedAt: Date;
+  readonly purchasedAt?: Date;
+  readonly vehicleId?: string;
+  readonly vehicleName?: string;
+}
+
+export interface ShoppingList {
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly vehicleId?: string;
+  readonly vehicleName?: string;
+  readonly items: ShoppingListItem[];
+  readonly totalEstimatedCostSEK: number;
+  readonly totalPurchasedCostSEK: number;
+  readonly itemCount: number;
+  readonly purchasedCount: number;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}
+
+// ====================================
 // CONSTANTS
 // ====================================
 

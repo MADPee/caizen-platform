@@ -370,11 +370,14 @@ _Priser uppdaterade: mars 2026. Alla priser inkl. moms._
 
 ### 🏷️ Budget-alternativ: Biltemas Eget Märke 5W-40
 
-| Förpackning | Pris                   | ACEA             | Kommentar      |
-| ----------- | ---------------------- | ---------------- | -------------- |
-| 1L          | ~100 kr                | A3/B3, A3/B4, C3 | Helsyntetisk   |
-| 4L          | ~300 kr (uppskattning) | A3/B3, A3/B4     | Finns i butik  |
-| 10L         | ~600 kr (uppskattning) | A3/B3, A3/B4     | Bäst literpris |
+| Förpackning | Art.nr      | Biltema-nr     | Pris        | ACEA             | kr/liter     |
+| ----------- | ----------- | -------------- | ----------- | ---------------- | ------------ |
+| 1L          | 36-1987     | 2000051987     | ~100 kr     | C3, A3/B3, A3/B4 | 100 kr/L     |
+| 4L          | 36-1918     | 2000051918     | ~299 kr     | A3/B3, A3/B4     | ~75 kr/L     |
+| **10L**     | **36-1919** | **2000051919** | **~599 kr** | **A3/B3, A3/B4** | **~60 kr/L** |
+
+> 💡 **10-liters dunken (art.nr 36-1919)** ger bäst literpris — 60 kr/L.
+> Räcker till oljebyte + påfyllning.
 
 > ⚠️ Biltemas olja uppfyller ACEA A3/B4 och fungerar tekniskt, men saknar
 > high-mileage-tillsatser. Kan komplettera med separat tätningskonditionerare.

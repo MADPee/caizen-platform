@@ -10,6 +10,15 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
 
 ### ✨ Tillagt
 
+- **Smart inköpslista** — Komplett inköpslista-feature med:
+  - `ShoppingListView` — Smart vy med butikgruppering, artikelnummer,
+    kvantitetshantering, progress-bar och status (att köpa/köpt)
+  - `ShoppingListService` — CRUD-service med localStorage-persistens
+  - `useShoppingList` — React hook med notifikationer och state management
+  - Typer: `ShoppingList`, `ShoppingListItem`, `ShoppingListItemStatus`
+  - "Lägg till i inköpslista"-knapp direkt i prisjämförelse-resultaten
+  - Badge-räknare i navigationen visar antal artiklar att köpa
+  - Toast-notifikationer vid tillägg/borttagning
 - **Prisjämförelse-feature** — Komplett prisinformations-modul med sökning,
   indexering och jämförelse av fordonsdelar från svenska butiker
   - `PriceDashboard` — Huvudvy med statistik och sökresultat
@@ -21,10 +30,14 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
     (Biltema, Mekonomen, Skruvat, AK24, Weboil, AutoExperten, Motonet)
   - `usePriceSearch` — React hook med state management, sortering och
     prishistorik
+- **Biltema-artikelnummer** — Korrekta artikelnummer indexerade:
+  - 10L: Art.nr 36-1919 (Biltema 2000051919)
+  - 4L: Art.nr 36-1918 (Biltema 2000051918)
+  - 1L: Art.nr 36-1987 (Biltema 2000051987)
 - **Pristyper** — TypeScript-typer för prisindexering: `Product`,
   `PriceEntry`, `Retailer`, `PriceSearchQuery`, `PriceSearchResult`,
   `PriceHistory`, `PriceAlert` m.fl.
-- **Navigation** — App-navigation mellan Fordon och Prisjämförelse
+- **Navigation** — App-navigation Fordon / Prisjämförelse / Inköpslista
 - **UC001: Motorolja för Volvo XC90 2.5T** — Komplett use case med forskningsanalys
   för optimalt oljeval vid 350 000 km (docs/use-cases/)
 - **UC001: Inköpsguide Sverige** — Prisjämförelse med fysiska butiker, onlinebutiker,
@@ -37,7 +50,7 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
 
 ### 🔧 Ändrat
 
-- **App.tsx** — Ny navigation med flikar (Fordon / Prisjämförelse), version 2.1
+- **App.tsx** — Navigation med 3 flikar (Fordon / Prisjämförelse / Inköpslista), v2.2
 - **docs/README.md** — Uppdaterad med use case-sektion och länk till UC001
 
 ---

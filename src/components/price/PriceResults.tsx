@@ -19,6 +19,7 @@ import {
   Award,
   Clock,
   Percent,
+  ListPlus,
 } from "lucide-react";
 import type {
   PriceSearchResult,
@@ -29,6 +30,7 @@ import type {
 
 interface PriceResultsProps {
   result: PriceSearchResult;
+  onAddToList?: (product: Product, price: PriceEntry) => void;
   onProductSelect?: (productId: string) => void;
   className?: string;
 }
@@ -64,7 +66,24 @@ function formatSEK(amount: number): string {
   }).format(amount);
 }
 
-function PriceRow({ price }: { price: PriceEntry }) {
+function PriceRow({
+  price,
+  onAddToList,
+}: {
+  price: PriceEntry;
+  onAddToList?: () => void;
+}) {
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onAddToList) {
+      onAddToList();
+      setAdded(true);
+      setTimeout(() => setAdded(false), 2000);
+    }
+  };
+
   return (
     <div
       className={`flex items-center justify-between py-2 px-3 rounded ${
@@ -133,6 +152,21 @@ function PriceRow({ price }: { price: PriceEntry }) {
           {price.inStock ? "I lager" : "Slut"}
         </span>
 
+        {onAddToList && (
+          <button
+            onClick={handleAdd}
+            className={`flex items-center gap-1 px-2 py-1 rounded text-[10px] transition-colors ${
+              added
+                ? "bg-green-600 text-white"
+                : "bg-orange-600/20 text-orange-400 hover:bg-orange-600/40"
+            }`}
+            title="Lägg till i inköpslista"
+          >
+            <ListPlus size={11} />
+            {added ? "Tillagd!" : "Köplista"}
+          </button>
+        )}
+
         <a
           href={price.url}
           target="_blank"
@@ -150,9 +184,11 @@ function PriceRow({ price }: { price: PriceEntry }) {
 function ProductCard({
   product,
   isFirst,
+  onAddToList,
 }: {
   product: Product;
   isFirst: boolean;
+  onAddToList?: (product: Product, price: PriceEntry) => void;
 }) {
   const [expanded, setExpanded] = useState(isFirst);
 
@@ -267,7 +303,13 @@ function ProductCard({
       {expanded && (
         <div className="border-t border-gray-700 p-3 space-y-1 bg-gray-850">
           {sortedPrices.map((price) => (
-            <PriceRow key={price.id} price={price} />
+            <PriceRow
+              key={price.id}
+              price={price}
+              onAddToList={
+                onAddToList ? () => onAddToList(product, price) : undefined
+              }
+            />
           ))}
 
           {cheapest && cheapest.retailer.freeShippingThresholdSEK && (
@@ -284,6 +326,7 @@ function ProductCard({
 
 const PriceResults: React.FC<PriceResultsProps> = ({
   result,
+  onAddToList,
   className = "",
 }) => {
   if (result.totalResults === 0) {
@@ -326,7 +369,12 @@ const PriceResults: React.FC<PriceResultsProps> = ({
       {/* Produktlista */}
       <div className="space-y-3">
         {result.products.map((product, idx) => (
-          <ProductCard key={product.id} product={product} isFirst={idx === 0} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            isFirst={idx === 0}
+            onAddToList={onAddToList}
+          />
         ))}
       </div>
 
