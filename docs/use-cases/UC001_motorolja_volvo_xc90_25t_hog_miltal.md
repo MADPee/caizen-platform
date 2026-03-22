@@ -370,23 +370,35 @@ _Priser uppdaterade: mars 2026. Alla priser inkl. moms._
 
 ### 🏷️ Budget-alternativ: Biltemas Eget Märke 5W-40
 
-| Förpackning | Art.nr      | Biltema-nr     | Pris        | ACEA             | kr/liter     |
-| ----------- | ----------- | -------------- | ----------- | ---------------- | ------------ |
-| 1L          | 36-1987     | 2000051987     | ~100 kr     | C3, A3/B3, A3/B4 | 100 kr/L     |
-| 4L          | 36-1918     | 2000051918     | ~299 kr     | A3/B3, A3/B4     | ~75 kr/L     |
-| **10L**     | **36-1919** | **2000051919** | **~599 kr** | **A3/B3, A3/B4** | **~60 kr/L** |
+| Förpackning | Art.nr     | Pris       | ACEA             | kr/liter       |
+| ----------- | ---------- | ---------- | ---------------- | -------------- |
+| 1L          | **34-878** | ~99 kr     | A3/B3, A3/B4     | 99 kr/L        |
+| 4L          | **34-879** | ~319 kr    | A3/B3, A3/B4     | ~80 kr/L       |
+| **10L**     | **34-880** | **649 kr** | **A3/B3, A3/B4** | **64:90 kr/L** |
 
-> 💡 **10-liters dunken (art.nr 36-1919)** ger bäst literpris — 60 kr/L.
-> Räcker till oljebyte + påfyllning.
+**OEM-godkännanden (överraskande bra för budgetolja):**
 
-> ⚠️ Biltemas olja uppfyller ACEA A3/B4 och fungerar tekniskt, men saknar
-> high-mileage-tillsatser. Kan komplettera med separat tätningskonditionerare.
+- API SN, SL, CF
+- ACEA A3/B3, A3/B4
+- MB 229.3, MB 229.5
+- BMW LL-98, LL-01
+- VW 502.00, 505.00
+- Renault RN 0700, RN 0710
+- GM-LL-A/B-025
+
+> 💡 **10-liters dunken (art.nr 34-880, 649 kr)** ger bäst literpris — 64:90 kr/L.
+> Räcker till oljebyte (5,8L) + påfyllning (4,2L kvar).
+> Hyllplats i butik: **BILVÅRD**.
+>
+> ⚠️ Saknar high-mileage-tillsatser (tätningskonditionerare), men OEM-godkännandena
+> (MB 229.5, BMW LL-01) placerar den i klass med Castrol EDGE och Mobil 1.
+> Kan komplettera med separat tätningskonditionerare.
 
 ### 📊 Totalkostnad per Oljebyte (6 liter = kapacitet + marginal)
 
 | Olja                        | Bästa pris/6L | Oljefilter (~80 kr) | **Totalt**  |
 | --------------------------- | ------------- | ------------------- | ----------- |
-| Biltema Eget Märke 5W-40    | ~450 kr       | 80 kr               | **~530 kr** |
+| Biltema 5W-40 (art. 34-880) | ~649 kr (10L) | 80 kr               | **~729 kr** |
 | Liqui Moly MoS2 10W-40      | ~420 kr       | 80 kr               | **~500 kr** |
 | **Valvoline MaxLife 5W-40** | **~640 kr**   | **80 kr**           | **~720 kr** |
 | Castrol EDGE 5W-40          | ~745 kr       | 80 kr               | **~825 kr** |

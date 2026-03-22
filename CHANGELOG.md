@@ -30,10 +30,11 @@ Format baserat på [Keep a Changelog](https://keepachangelog.com/sv/1.1.0/).
     (Biltema, Mekonomen, Skruvat, AK24, Weboil, AutoExperten, Motonet)
   - `usePriceSearch` — React hook med state management, sortering och
     prishistorik
-- **Biltema-artikelnummer** — Korrekta artikelnummer indexerade:
-  - 10L: Art.nr 36-1919 (Biltema 2000051919)
-  - 4L: Art.nr 36-1918 (Biltema 2000051918)
-  - 1L: Art.nr 36-1987 (Biltema 2000051987)
+- **Biltema-artikelnummer** — Verifierade med Biltema-appen:
+  - 10L: **Art. 34-880** — 649 kr (64:90 kr/L)
+  - 4L: **Art. 34-879** — ~319 kr
+  - 1L: **Art. 34-878** — ~99 kr
+  - OEM: MB 229.3/229.5, BMW LL-01, VW 502/505, Renault RN 0700/0710
 - **Pristyper** — TypeScript-typer för prisindexering: `Product`,
   `PriceEntry`, `Retailer`, `PriceSearchQuery`, `PriceSearchResult`,
   `PriceHistory`, `PriceAlert` m.fl.
