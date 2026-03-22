@@ -19,18 +19,23 @@ tätningsegenskaper och slitskydd.
 
 ## 🚗 Fordonsdata
 
-| Parameter                 | Värde                         |
-| ------------------------- | ----------------------------- |
-| **Tillverkare**           | Volvo                         |
-| **Modell**                | XC90 2.5T AWD                 |
-| **Motor**                 | B5254T2 (5-cyl, 2.5L turbo)   |
-| **Effekt**                | 210 hk / 320 Nm               |
-| **Byggår**                | November 2004                 |
-| **Mätarställning**        | 350 000 km                    |
-| **Bränsle**               | Bensin (95 oktan)             |
-| **Oljekapacitet**         | 5,8 liter (inkl. filter 0,3L) |
-| **Originalspecifikation** | Syntetisk 0W-30 / 5W-30       |
-| **ACEA-klass**            | A3/B4 (minimum)               |
+| Parameter                        | Värde                                                |
+| -------------------------------- | ---------------------------------------------------- |
+| **Tillverkare**                  | Volvo                                                |
+| **Modell**                       | XC90 2.5T AWD                                        |
+| **Motor**                        | B5254T2 (5-cyl, 2.5L turbo)                          |
+| **Effekt**                       | 210 hk / 320 Nm                                      |
+| **Byggår**                       | November 2004                                        |
+| **Mätarställning**               | 350 000 km                                           |
+| **Bränsle**                      | Bensin (95 oktan)                                    |
+| **Oljekapacitet**                | 5,8 liter (inkl. filter 0,3L)                        |
+| **Volvos oljekrav (ägarmanual)** | ILSAC GF-4, API SL, eller ACEA A1/B1 (minimum)       |
+| **Rekommenderad viskositet**     | SAE 5W-30 (normal körning)                           |
+| **Extrem körning**               | SAE 0W-30 eller 0W-40 syntetisk                      |
+| **Oljetillsatser**               | "Oil additives must not be used" (Volvos ägarmanual) |
+
+> 📖 **Källa:** Volvo XC90 2004 Owners Manual, sektion "Oil specifications"
+> (volvedia.com/inf-539.html)
 
 ---
 
@@ -265,6 +270,78 @@ bör det prioriteras **före** oljebyte.
 4. **Byt kamaxeltätningar** om det syns oljeläckage vid ventilkåpan
 5. **Kontrollera oljetrycket** — om varningslampan blinkar vid tomgång,
    överväg tjockare olja (10W-40) eller undersök oljetrycksgivaren
+
+---
+
+## ✅ Passar Biltema 5W-40 (Art. 34-880) till Denna Motor?
+
+### Jämförelse: Volvos Krav vs Biltema 34-880
+
+| Krav (Volvo ägarmanual)   | Biltema 34-880 (avläst från produkt) | Uppfyllt?      |
+| ------------------------- | ------------------------------------ | -------------- |
+| ACEA A1/B1 (minimum)      | ACEA A3/B3, A3/B4                    | ✅ Överträffar |
+| API SL (minimum)          | API SN, SL, CF                       | ✅ Överträffar |
+| SAE 5W-30 (rekommenderad) | SAE 5W-40                            | ⚠️ Se nedan    |
+
+### Bedömning
+
+**API och ACEA:** Biltema-oljan **överträffar** Volvos minimumkrav med marginal.
+ACEA A3/B4 är en strängare specifikation än A1/B1.
+
+**Viskositet (5W-40 vs 5W-30):** Biltema-oljan är tjockare vid drifttemperatur
+(40 vs 30). Detta är **inte** Volvos originalrekommendation. Dock:
+
+- Vid 350 000 km har motorns toleranser ökat
+- Tjockare oljefilm kompenserar slitage i lager och cylindrar
+- 5W ger fortfarande bra kallstartsskydd i nordiskt klimat
+- Många verkstäder rekommenderar 5W-40 för motorer med högt miltal
+
+**OEM-godkännanden på burken:** MB 229.5, BMW LL-01, VW 502/505 — dessa
+visar att oljan håller hög kvalitet trots budget-priset.
+
+### Slutsats
+
+**Ja, Biltema 34-880 passar.** Den överträffar Volvos ACEA- och API-krav.
+Den högre viskositeten (40 istället för 30) är motiverad vid 350 000 km.
+
+> ⚠️ Om motorn INTE har hög oljeförbrukning och körs normalt, skulle
+> en 5W-30 (Volvos originalrekommendation) vara mer korrekt. Biltema säljer
+> även 5W-30 — kontrollera sortimentet i butik.
+
+---
+
+## ⚠️ Oljetillsatser — Volvos Ställningstagande
+
+### Volvos Ägarmanual Säger:
+
+> **"Oil additives must not be used."**
+>
+> — Volvo XC90 2004 Owners Manual, Oil specifications
+
+Detta är Volvos officiella ställningstagande. Tillsatser kan påverka
+oljans kemiska balans och potentiellt skada tätningar eller katalysator.
+
+### Vid 350 000 km — Verkligheten
+
+Vid detta miltal kan det ändå vara motiverat att överväga:
+
+1. **Motorsköljmedel (engine flush)** — före oljebyte, för att lösa slam.
+   Biltema har motorsköljmedel i sortimentet (sök "motorsköljmedel" i
+   Biltema-appen för aktuellt artikelnummer och pris).
+
+2. **Oljeläckagetätning (stop leak)** — om motorn läcker olja vid
+   tätningar. Biltema har "oljeläckagetätning" i sortimentet (sök i appen).
+
+> ⚠️ **Jag kan inte verifiera artikelnummer eller priser för Biltemas
+> tillsatser** — sök i Biltema-appen eller kontrollera i butik.
+> Jag visar inte gissade uppgifter.
+
+### Rekommendation
+
+Om du vill ha inbyggd tätningskonditionerare **utan separata tillsatser**,
+välj **Valvoline MaxLife 5W-40** istället — den har tätningskonditionerare
+som en del av oljeformuleringen. Kontrollera tillgänglighet och pris
+i butik eller online (ej verifierat av oss).
 
 ---
 
