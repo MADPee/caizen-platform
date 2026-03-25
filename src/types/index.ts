@@ -573,6 +573,292 @@ export type UpdateType<T> = PartialExcept<
 >;
 
 // ====================================
+// UNDERHÅLL & REKOMMENDATION TYPES
+// ====================================
+
+export type MaintenanceCategory =
+  | "oil_change"
+  | "brake_service"
+  | "tire_rotation"
+  | "timing_belt"
+  | "coolant_flush"
+  | "transmission_service"
+  | "pcv_service"
+  | "spark_plugs"
+  | "general_inspection";
+
+export type OilViscosity =
+  | "0W-20"
+  | "0W-30"
+  | "5W-30"
+  | "5W-40"
+  | "10W-40"
+  | "15W-50";
+
+export type OilType = "full_synthetic" | "semi_synthetic" | "mineral";
+
+export type ACEAClass = "A1/B1" | "A3/B3" | "A3/B4" | "A5/B5" | "C2" | "C3";
+
+export interface OilRecommendation {
+  readonly brand: string;
+  readonly product: string;
+  readonly viscosity: OilViscosity;
+  readonly oilType: OilType;
+  readonly aceaClass: ACEAClass;
+  readonly apiRating: string;
+  readonly highMileage: boolean;
+  readonly sealConditioner: boolean;
+  readonly estimatedPriceSEK: {
+    readonly min: number;
+    readonly max: number;
+    readonly per: "liter" | "5L";
+  };
+  readonly pros: string[];
+  readonly cons: string[];
+  readonly rating: number;
+}
+
+export interface MaintenanceRecommendation {
+  readonly id: string;
+  readonly vehicleId: string;
+  readonly category: MaintenanceCategory;
+  readonly title: string;
+  readonly description: string;
+  readonly urgency: "low" | "medium" | "high" | "critical";
+  readonly basedOnMileage: number;
+  readonly basedOnVehicleAge: number;
+  readonly recommendedInterval: {
+    readonly km: number;
+    readonly months: number;
+  };
+  readonly oilRecommendations?: OilRecommendation[];
+  readonly estimatedCostSEK: {
+    readonly min: number;
+    readonly max: number;
+  };
+  readonly relatedIssues: string[];
+  readonly sources: string[];
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}
+
+export interface MaintenanceSchedule {
+  readonly vehicleId: string;
+  readonly recommendations: MaintenanceRecommendation[];
+  readonly nextServiceDate: Date;
+  readonly nextServiceMileage: number;
+  readonly overallHealthScore: number;
+  readonly warnings: string[];
+}
+
+// ====================================
+// PRISINDEXERING & PRISJÄMFÖRELSE TYPES
+// ====================================
+
+export type ProductCategory =
+  | "motor_oil"
+  | "oil_filter"
+  | "brake_pads"
+  | "brake_discs"
+  | "tires"
+  | "wiper_blades"
+  | "air_filter"
+  | "cabin_filter"
+  | "spark_plugs"
+  | "coolant"
+  | "transmission_fluid"
+  | "battery"
+  | "other";
+
+export type RetailerType = "online" | "physical" | "both";
+
+export type PriceTrend = "rising" | "stable" | "falling" | "unknown";
+
+export type Currency = "SEK" | "EUR" | "NOK" | "DKK";
+
+export interface Retailer {
+  readonly id: string;
+  readonly name: string;
+  readonly url?: string;
+  readonly type: RetailerType;
+  readonly logoUrl?: string;
+  readonly country: "SE" | "NO" | "DK" | "FI" | "DE";
+  readonly shippingCostSEK?: number;
+  readonly freeShippingThresholdSEK?: number;
+  readonly pickupAvailable: boolean;
+  readonly pickupTimeHours?: number;
+  readonly trustScore: number;
+  readonly reviewCount: number;
+}
+
+export interface PriceEntry {
+  readonly id: string;
+  readonly productId: string;
+  readonly retailerId: string;
+  readonly retailer: Retailer;
+  readonly priceSEK: number;
+  readonly originalPrice?: number;
+  readonly currency: Currency;
+  readonly isOnSale: boolean;
+  readonly salePercentage?: number;
+  readonly inStock: boolean;
+  readonly stockQuantity?: number;
+  readonly url: string;
+  readonly lastVerified: Date;
+  readonly pricePerUnit?: number;
+  readonly unitSize: string;
+  readonly verified: boolean;
+  readonly verifiedSource?: string;
+}
+
+export interface Product {
+  readonly id: string;
+  readonly name: string;
+  readonly brand: string;
+  readonly category: ProductCategory;
+  readonly description: string;
+  readonly specifications: Record<string, string>;
+  readonly imageUrl?: string;
+  readonly ean?: string;
+  readonly partNumber?: string;
+  readonly compatibleVehicles: VehicleCompatibility[];
+  readonly prices: PriceEntry[];
+  readonly lowestPrice: number;
+  readonly highestPrice: number;
+  readonly averagePrice: number;
+  readonly pricePerLiter?: number;
+  readonly priceTrend: PriceTrend;
+  readonly lastUpdated: Date;
+  readonly rating?: number;
+  readonly reviewCount?: number;
+}
+
+export interface VehicleCompatibility {
+  readonly make: string;
+  readonly model?: string;
+  readonly yearFrom?: number;
+  readonly yearTo?: number;
+  readonly engineCode?: string;
+}
+
+export interface PriceSearchQuery {
+  readonly query: string;
+  readonly category?: ProductCategory;
+  readonly brand?: string;
+  readonly vehicleMake?: string;
+  readonly vehicleModel?: string;
+  readonly vehicleYear?: number;
+  readonly engineCode?: string;
+  readonly viscosity?: OilViscosity;
+  readonly aceaClass?: ACEAClass;
+  readonly maxPriceSEK?: number;
+  readonly minPriceSEK?: number;
+  readonly onlyInStock?: boolean;
+  readonly onlyOnSale?: boolean;
+  readonly sortBy: PriceSortOption;
+  readonly sortOrder: "asc" | "desc";
+  readonly retailers?: string[];
+  readonly country?: "SE" | "NO" | "DK" | "FI" | "DE";
+}
+
+export type PriceSortOption =
+  | "price_lowest"
+  | "price_highest"
+  | "price_per_unit"
+  | "rating"
+  | "relevance"
+  | "retailer_trust"
+  | "last_updated";
+
+export interface PriceSearchResult {
+  readonly query: PriceSearchQuery;
+  readonly products: Product[];
+  readonly totalResults: number;
+  readonly searchTime: number;
+  readonly retailers: Retailer[];
+  readonly priceRange: {
+    readonly min: number;
+    readonly max: number;
+    readonly average: number;
+  };
+  readonly lastUpdated: Date;
+}
+
+export interface PriceAlert {
+  readonly id: string;
+  readonly userId: string;
+  readonly productId: string;
+  readonly targetPriceSEK: number;
+  readonly currentPriceSEK: number;
+  readonly isTriggered: boolean;
+  readonly triggeredAt?: Date;
+  readonly createdAt: Date;
+  readonly active: boolean;
+}
+
+export interface PriceHistory {
+  readonly productId: string;
+  readonly retailerId: string;
+  readonly entries: Array<{
+    readonly date: Date;
+    readonly priceSEK: number;
+  }>;
+  readonly trend: PriceTrend;
+  readonly lowestEver: number;
+  readonly highestEver: number;
+  readonly lowestEverDate: Date;
+  readonly highestEverDate: Date;
+}
+
+// ====================================
+// INKÖPSLISTA TYPES
+// ====================================
+
+export type ShoppingListItemStatus =
+  | "pending"
+  | "purchased"
+  | "skipped"
+  | "out_of_stock";
+
+export interface ShoppingListItem {
+  readonly id: string;
+  readonly productId: string;
+  readonly productName: string;
+  readonly brand: string;
+  readonly category: ProductCategory;
+  readonly specifications: Record<string, string>;
+  readonly selectedRetailerId: string;
+  readonly selectedRetailerName: string;
+  readonly selectedPriceSEK: number;
+  readonly quantity: number;
+  readonly unitSize: string;
+  readonly totalPriceSEK: number;
+  readonly url: string;
+  readonly articleNumber?: string;
+  readonly status: ShoppingListItemStatus;
+  readonly notes?: string;
+  readonly addedAt: Date;
+  readonly purchasedAt?: Date;
+  readonly vehicleId?: string;
+  readonly vehicleName?: string;
+}
+
+export interface ShoppingList {
+  readonly id: string;
+  readonly name: string;
+  readonly description?: string;
+  readonly vehicleId?: string;
+  readonly vehicleName?: string;
+  readonly items: ShoppingListItem[];
+  readonly totalEstimatedCostSEK: number;
+  readonly totalPurchasedCostSEK: number;
+  readonly itemCount: number;
+  readonly purchasedCount: number;
+  readonly createdAt: Date;
+  readonly updatedAt: Date;
+}
+
+// ====================================
 // CONSTANTS
 // ====================================
 
